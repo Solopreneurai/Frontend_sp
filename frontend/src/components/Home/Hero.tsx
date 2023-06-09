@@ -78,7 +78,6 @@ export default function Hero() {
       </CustomBox>
       <CustomBox>
         <StartButton variant="contained">Get Started</StartButton>
-
         <RequestButton variant="outlined">Request Demo</RequestButton>
       </CustomBox>
     </HeroSection>

@@ -26,9 +26,8 @@ export default function Contact() {
           service provider to maximize website conversions.
         </Typography>
         <CustomBox style={{justifyContent: 'flex-start'}}>
-        <StartButton variant="contained">Get Started</StartButton>
-
-        <RequestButton variant="outlined">Request Demo</RequestButton>
+        <StartButton variant="contained">Book Meeting</StartButton>
+        <RequestButton variant="outlined">Chat With Us</RequestButton>
       </CustomBox>
       </Box>
       <Box textAlign="center">
