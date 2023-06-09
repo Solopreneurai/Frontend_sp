@@ -10,7 +10,7 @@ const HeroSection = styled(Box)({
   alignItems: "center",
   color: "#2b3c4d",
 });
-const CustomBox = styled(Box)({
+export const CustomBox = styled(Box)({
   display: "flex",
   gap: "20px",
   justifyContent: "center",
@@ -21,7 +21,7 @@ const Text = styled(Box)({
   display: "flex",
   gap: "2px",
 });
-const StartButton = styled(Button)({
+export const StartButton = styled(Button)({
   backgroundColor: "#ff5c35",
   fontWeight: 600,
   textTransform: "none",
@@ -30,7 +30,7 @@ const StartButton = styled(Button)({
   },
   padding: "10px 30px",
 });
-const RequestButton = styled(Button)({
+export const RequestButton = styled(Button)({
   borderColor: "#ff5c35",
   color: "#ff5c35",
   padding: "10px 30px",
