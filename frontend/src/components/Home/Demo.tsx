@@ -1,14 +1,10 @@
-import { Box, styled, Typography } from "@mui/material";
-
-const DemoSection = styled(Box)({
-  padding: "100px",
-  
-})
+import { Box } from "@mui/material";
+import  video from "../../assets/demo.mp4";
 
 export default function Demo() {
   return (
-    <DemoSection>
-      <Typography variant="h2">Demo section</Typography>
-    </DemoSection>
-  )
+    <Box sx={{p: 2}} textAlign="center">
+      <video src={video} width="80%" controls autoPlay></video>
+    </Box>
+  );
 }
