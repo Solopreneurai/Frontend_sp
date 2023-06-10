@@ -1,6 +1,10 @@
 import { Box, styled, Typography } from "@mui/material";
 import DemoImg from "../../assets/demo.png"
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
 const WorkSection = styled(Box)({
   padding: "60px",
   width: "100%",
@@ -11,6 +15,9 @@ const WorkSection = styled(Box)({
 });
 
 export default function Working() {
+  useEffect(() =>{
+    AOS.init()
+  }, [])
   return (
     <WorkSection sx={{pb: "0 !important"}}>
       <Box maxWidth="600px">
@@ -22,7 +29,7 @@ export default function Working() {
           easy steps, create and train a chatbot for your website.
         </Typography>
       </Box>
-      <img src={DemoImg} alt="demo-img" width="80%" height="600px" />
+      <img src={DemoImg} alt="demo-img" width="80%" height="600px" data-aos="fade-up" data-aos-duration="3000" />
     </WorkSection>
   );
 }

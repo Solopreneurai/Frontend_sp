@@ -1,6 +1,9 @@
 import { Box, styled, Typography } from "@mui/material";
 import Img from "../../assets/contact-img.png";
 import { CustomBox, StartButton, RequestButton } from "./Hero"
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ContactSection = styled(Box)({
   padding: "60px",
@@ -11,9 +14,12 @@ const ContactSection = styled(Box)({
 });
 
 export default function Contact() {
+  useEffect(()=>{
+    AOS.init()
+  },[])
   return (
     <ContactSection>
-      <Box maxWidth='500px'>
+      <Box maxWidth='500px' data-aos="fade-right" data-aos-duration="3000">
         <Typography align="left" variant="h2" fontWeight={800} mb={6}>
           Contact us
         </Typography>
@@ -30,7 +36,7 @@ export default function Contact() {
         <RequestButton variant="outlined">Chat With Us</RequestButton>
       </CustomBox>
       </Box>
-      <Box textAlign="center">
+      <Box textAlign="center" data-aos="fade-left" data-aos-duration="3000">
         <img src={Img} alt="alt" width="80%" />
       </Box>
     </ContactSection>

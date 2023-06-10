@@ -1,5 +1,8 @@
 import { Box, styled, Typography } from "@mui/material";
 import img from "../../assets/chatbot-bg.png"
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const AboutSection = styled(Box)({
   padding: "100px 200px 20px 200px",
@@ -9,8 +12,11 @@ const AboutSection = styled(Box)({
   textAlign: 'center'
 });
 export default function About() {
+  useEffect(() =>{
+    AOS.init()
+  }, [])
   return (
-    <AboutSection>
+    <AboutSection data-aos="fade-up" data-aos-duration="3000">
       <Typography variant="h2" fontWeight={800}>
         Make customer engagement easy and fun!
       </Typography>
