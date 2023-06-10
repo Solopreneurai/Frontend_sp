@@ -22,7 +22,7 @@ export default function Working() {
           easy steps, create and train a chatbot for your website.
         </Typography>
       </Box>
-      <img src={DemoImg} alt="demo-img" width="100%" height="600px" />
+      <img src={DemoImg} alt="demo-img" width="80%" height="600px" />
     </WorkSection>
   );
 }
