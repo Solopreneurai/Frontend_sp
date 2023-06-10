@@ -6,3 +6,9 @@
 .container {
     max-width: 1600px;
 }
+.swiper-slide {
+    filter: blur(5px) grayscale(1);
+}
+.swiper-slide-active {
+    filter: blur(0) grayscale(0);
+}
