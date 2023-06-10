@@ -169,7 +169,7 @@ const pricingData: RowData[] = [
 
 export default function Pricing() {
   return (
-    <PricingSection>
+    <PricingSection id="pricing">
       <Typography variant="h4" fontWeight={600} align="center" mb={5}>
         Pricing
       </Typography>

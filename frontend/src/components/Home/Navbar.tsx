@@ -4,7 +4,7 @@ import Icon from "../../assets/chatbot-logo.png";
 const NavSection = styled(Box)({
   display: "flex",
   position: "fixed",
-  padding: "12px 64px",
+  padding: "8px 64px",
   width: "100%",
   justifyContent: "space-between",
   alignItems: "center",
@@ -15,25 +15,27 @@ const NavSection = styled(Box)({
  
 });
 const Image = styled("img")({
-  height: "60px",
+  height: "56px",
   cursor: "pointer",
 });
 const NavStyle = styled(Box)({
   display: "flex",
 });
 const NavLink = styled("a")({
-  padding: "20px 28px 8px 28px",
+  padding: "16px 28px 8px 28px",
+  color:'inherit',
+  textDecoration:"none"
 });
 
 const NavList = () => {
   return (
     <NavStyle>
-      <NavLink>
+      <NavLink href="#pricing">
         <Typography variant="subtitle1" fontWeight={600}>
           Pricing
         </Typography>
       </NavLink>
-      <NavLink>
+      <NavLink href="#features">
         <Typography variant="subtitle1" fontWeight={600}>
           Features
         </Typography>
@@ -41,6 +43,11 @@ const NavList = () => {
       <NavLink>
         <Typography variant="subtitle1" fontWeight={600}>
           Resources
+        </Typography>
+      </NavLink>
+      <NavLink href="#contact">
+        <Typography variant="subtitle1" fontWeight={600}>
+          Contact
         </Typography>
       </NavLink>
     </NavStyle>

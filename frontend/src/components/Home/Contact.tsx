@@ -18,7 +18,7 @@ export default function Contact() {
     AOS.init()
   },[])
   return (
-    <ContactSection>
+    <ContactSection id="contact">
       <Box maxWidth='500px' data-aos="fade-right" data-aos-duration="3000">
         <Typography align="left" variant="h2" fontWeight={800} mb={6}>
           Contact us
