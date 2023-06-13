@@ -12,7 +12,7 @@ import "aos/dist/aos.css";
 import { Autoplay, EffectCoverflow } from "swiper";
 import { useEffect } from "react";
 const FeatureSection = styled(Box)({
-  padding: "60px",
+  padding: "100px 60px",
   width: "100%",
   color: "#2b3c4d",
 });
@@ -67,4 +67,3 @@ export default function Features() {
     </FeatureSection>
   );
 }
-//add image and text for features

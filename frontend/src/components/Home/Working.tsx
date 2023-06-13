@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 
 const WorkSection = styled(Box)({
-  padding: "60px",
+  padding: "100px 60px",
   width: "100%",
   color: "#2b3c4d",
   display: "flex",

@@ -2,7 +2,7 @@ import { Box, styled, Typography } from "@mui/material";
 import { HorizontalRule, CheckCircle } from "@mui/icons-material/";
 
 const PricingSection = styled(Box)({
-  padding: "60px 20px",
+  padding: "100px 20px",
   color: "#2b3c4d",
   width: "100%",
 });

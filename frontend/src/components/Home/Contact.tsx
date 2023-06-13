@@ -1,12 +1,12 @@
 import { Box, styled, Typography } from "@mui/material";
 import Img from "../../assets/contact-img.png";
-import { CustomBox, StartButton, RequestButton } from "./Hero";
+import { CustomBox, OutlinedButton, FilledButton } from "./Hero";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const ContactSection = styled(Box)({
-  padding: "60px",
+  padding: "100px 60px",
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
   color: "#2b3c4d",
@@ -33,8 +33,8 @@ export default function Contact() {
           service provider to maximize website conversions.
         </Typography>
         <CustomBox style={{ justifyContent: "flex-start" }}>
-          <StartButton variant="contained">Book Meeting</StartButton>
-          <RequestButton variant="outlined">Chat With Us</RequestButton>
+          <FilledButton variant="contained">Book Meeting</FilledButton>
+          <OutlinedButton variant="outlined">Chat With Us</OutlinedButton>
         </CustomBox>
       </Box>
       <Box textAlign="center" data-aos="fade-left" data-aos-duration="3000">

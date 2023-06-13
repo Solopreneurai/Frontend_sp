@@ -62,3 +62,5 @@ export default function Navbar() {
     </NavSection>
   );
 }
+// mobile view
+// sign in or sign up button

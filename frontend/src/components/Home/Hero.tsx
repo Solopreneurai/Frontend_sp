@@ -21,7 +21,7 @@ const Text = styled(Box)({
   display: "flex",
   gap: "2px",
 });
-export const StartButton = styled(Button)({
+export const FilledButton = styled(Button)({
   backgroundColor: "#ff5c35",
   fontWeight: 600,
   textTransform: "none",
@@ -30,7 +30,7 @@ export const StartButton = styled(Button)({
   },
   padding: "10px 30px",
 });
-export const RequestButton = styled(Button)({
+export const OutlinedButton = styled(Button)({
   borderColor: "#ff5c35",
   color: "#ff5c35",
   padding: "10px 30px",
@@ -77,8 +77,8 @@ export default function Hero() {
         </Text>
       </CustomBox>
       <CustomBox>
-        <StartButton variant="contained">Get Started</StartButton>
-        <RequestButton variant="outlined">Request Demo</RequestButton>
+        <FilledButton variant="contained">Get Started</FilledButton>
+        <OutlinedButton variant="outlined">Request Demo</OutlinedButton>
       </CustomBox>
     </HeroSection>
   );
