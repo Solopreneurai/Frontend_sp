@@ -1,0 +1,15 @@
+.side-nav-btn {
+    border-radius: 10px !important;
+    gap: 10px;
+    padding: 10px 12px !important;
+    margin: 24px 0 !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+  }
+
+  .MuiTabs-indicator {
+    display: none;
+  }
+ 
