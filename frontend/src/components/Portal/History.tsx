@@ -1,6 +1,8 @@
 import { Box, Divider, InputAdornment, TextField, Typography, styled } from "@mui/material"
 import { useState } from "react"
 import  { NoteAdd, Search } from '@mui/icons-material/';
+import NoFile from "../../assets/empty.png"
+
 const Wrapper = styled(Box)({
     padding: "5px 30px",
 })
@@ -50,11 +52,14 @@ const SearchBox = styled(TextField)({
     padding: '8px 12px',
   },
   "& fieldset": { border: "none" },
-  
 })
+const MainWrapper = styled(Box)({
+  display: 'flex',
+  justifyContent:'center'
+})
+
 function History() {
   const [view, setView] = useState("Folder")
-  
   return (
     <Wrapper>
       <Divider />
@@ -73,7 +78,7 @@ function History() {
       </ViewBox>
       <SearchContainer>
       <SearchBox
-        placeholder="Search in Library"
+        placeholder="Search in History"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -89,6 +94,9 @@ function History() {
         </IconBox>
       </SearchContainer>
     </FlexBox>
+    <MainWrapper>
+      <img src={NoFile} alt="no file or folder" width='35%' />
+    </MainWrapper>
     </Wrapper>
   )
 }
