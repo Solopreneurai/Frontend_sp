@@ -1,10 +1,15 @@
 import { Box, Typography, styled, Chip, Divider } from "@mui/material";
 import { FilledButton } from "../Home/Hero";
 import { AddCircleOutline } from "@mui/icons-material";
+import NoChatBot from  "../../assets/no-chatbot.png"
 
 const Wrapper = styled(Box)({
-  padding: "20px 30px",
+  padding: "10px 30px",
 });
+const ImgBox = styled(Box)({
+  display: 'flex',
+  justifyContent:'center'
+})
 function Builder() {
   const num = "0";
   return (
@@ -32,7 +37,9 @@ function Builder() {
       </Box>
 
       <Divider />
-      <Box></Box>
+      <ImgBox>
+      <img src={NoChatBot} width="40%" alt="no chatbots made" />
+      </ImgBox>
     </Wrapper>
   );
 }
