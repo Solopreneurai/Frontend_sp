@@ -2,6 +2,7 @@ import { Box, styled, Typography } from "@mui/material";
 import Icon from "../../assets/chatbot-logo.png";
 import { FilledButton } from "./Hero";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 const NavSection = styled(Box)({
   display: "flex",
@@ -22,7 +23,7 @@ const Image = styled("img")({
 const NavStyle = styled(Box)({
   display: "flex",
 });
-const NavLink = styled("a")({
+const NavLink = styled(HashLink)({
   padding: "12px 28px 8px 28px",
   color: "inherit",
   textDecoration: "none",
@@ -35,22 +36,22 @@ const LoginButton = styled(FilledButton)({
 const NavList = () => {
   return (
     <NavStyle>
-      <NavLink href="#pricing">
+      <NavLink to="#pricing">
         <Typography variant="subtitle1" fontWeight={600}>
           Pricing
         </Typography>
       </NavLink>
-      <NavLink href="#features">
+      <NavLink to="#features">
         <Typography variant="subtitle1" fontWeight={600}>
           Features
         </Typography>
       </NavLink>
-      <NavLink>
+      <NavLink to="#">
         <Typography variant="subtitle1" fontWeight={600}>
           Resources
         </Typography>
       </NavLink>
-      <NavLink href="#contact">
+      <NavLink to="#contact">
         <Typography variant="subtitle1" fontWeight={600}>
           Contact
         </Typography>
