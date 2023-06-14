@@ -30,7 +30,6 @@ const Logo = styled(Box)({
   gap: "20px",
   paddingBottom: "12px",
 });
-
 const SelectButton = styled(Button)({
   color: "inherit",
   justifyContent: "space-between",
@@ -50,13 +49,11 @@ const SelectButton = styled(Button)({
     },
   },
 });
-
 const NavBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
   gap: "12px",
 });
-
 const CustomBox = styled('a')({
   display: "flex",
   gap: "10px",
@@ -72,7 +69,6 @@ type Props = {
   id: string
   setTab: Dispatch<SetStateAction<string>>
 }
-
 
 export default function SideNav({id, setTab} : Props) {
   const handleTabs = (id: string) => {
@@ -96,8 +92,7 @@ export default function SideNav({id, setTab} : Props) {
       >
         Create New
       </FilledButton>
-      
-
+    
       <NavBox>
         <SelectButton>
           <Typography variant="body2" fontWeight={600} className="text">
@@ -167,4 +162,3 @@ export default function SideNav({id, setTab} : Props) {
     </SideWrapper>
   );
 }
-// add a plan box
