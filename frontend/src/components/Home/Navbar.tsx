@@ -1,5 +1,7 @@
 import { Box, styled, Typography } from "@mui/material";
 import Icon from "../../assets/chatbot-logo.png";
+import { FilledButton } from "./Hero";
+import { Link } from "react-router-dom";
 
 const NavSection = styled(Box)({
   display: "flex",
@@ -12,19 +14,22 @@ const NavSection = styled(Box)({
   zIndex: "2147483647",
   backgroundColor: "#fff",
   color: "#2b3c4d",
- 
 });
 const Image = styled("img")({
-  height: "56px",
+  height: "50px",
   cursor: "pointer",
 });
 const NavStyle = styled(Box)({
   display: "flex",
 });
 const NavLink = styled("a")({
-  padding: "16px 28px 8px 28px",
-  color:'inherit',
-  textDecoration:"none"
+  padding: "12px 28px 8px 28px",
+  color: "inherit",
+  textDecoration: "none",
+});
+const LoginButton = styled(FilledButton)({
+  padding: "10px 40px",
+  marginLeft: "20px",
 });
 
 const NavList = () => {
@@ -50,6 +55,9 @@ const NavList = () => {
           Contact
         </Typography>
       </NavLink>
+      <Link to="/login">
+        <LoginButton variant="contained">Login</LoginButton>
+      </Link>
     </NavStyle>
   );
 };

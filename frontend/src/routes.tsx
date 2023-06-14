@@ -3,25 +3,20 @@ import { RouteObject, useRoutes } from "react-router-dom"
 
 const Portal = lazy(() => import('./pages/Portal'))
 const Home = lazy(() => import('./pages/Home'))
+const Login = lazy(() => import("./pages/Login"))
 
 const routes : RouteObject[] = [
     {
         path: "/",
-        children: [
-            {
-                index: true,
-                element: <Home />
-            }
-        ]
+        element: <Home />
     },
     {
-        path: "portal",
-        children: [
-            {
-                index: true,
-                element: <Portal />
-            }
-        ]
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/portal",
+        element: <Portal />
     }
 ]
 export default function Router() {
