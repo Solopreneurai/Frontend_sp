@@ -17,9 +17,6 @@ const Image = styled("img")({
   height: "50px",
   cursor: "pointer",
 });
-const NavStyle = styled(Box)({
-  display: "flex",
-});
 const NavLink = styled(HashLink)({
   padding: "12px 28px 8px 28px",
   color: "inherit",
@@ -32,7 +29,7 @@ const LoginButton = styled(FilledButton)({
 
 const NavList = () => {
   return (
-    <NavStyle>
+    <Box sx={{display: 'flex'}}>
       <NavLink to="#pricing">
         <Typography variant="subtitle1" fontWeight={600}>
           Pricing
@@ -56,7 +53,7 @@ const NavList = () => {
       <Link to="/login">
         <LoginButton variant="contained">Login</LoginButton>
       </Link>
-    </NavStyle>
+    </Box>
   );
 };
 

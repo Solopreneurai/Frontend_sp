@@ -1,24 +1,38 @@
 .page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .portal-header {
-    padding: 40px 30px 10px 30px;
-    display: flex;
-    justify-content: space-between;
+  padding: 40px 30px 10px 30px;
+  display: flex;
+  justify-content: space-between;
 }
 .flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .container {
-    max-width: 1600px;
+  max-width: 1600px;
 }
 .swiper-slide {
-    filter: blur(5px) grayscale(1);
+  filter: blur(5px) grayscale(1);
 }
 .swiper-slide-active {
-    filter: blur(0) grayscale(0);
+  filter: blur(0) grayscale(0);
+}
+
+.MuiTabs-flexContainer {
+  gap: 32px;
+}
+.side-nav-btn {
+  border-radius: 10px !important;
+  gap: 10px;
+  padding: 10px 12px !important;
+  margin: 12px 0 !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

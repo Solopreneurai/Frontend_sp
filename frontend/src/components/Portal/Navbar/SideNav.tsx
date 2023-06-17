@@ -7,7 +7,6 @@ import {
   Paid,
 } from "@mui/icons-material/";
 import logo from "../../../assets/chatbot-logo.png";
-import "../Portal.css";
 import CreateNew from "./CreateNew";
 import Folder from "./Folder";
 import { Link } from "react-router-dom";
