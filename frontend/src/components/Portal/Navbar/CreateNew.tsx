@@ -25,7 +25,7 @@ function CreateNew() {
         open={open}
         handleClose={handleClose}
         title="New Project"
-        text="santushti sharma"
+        text="Project Name"
         placeholder="Enter the name of project"
       />
     </div>

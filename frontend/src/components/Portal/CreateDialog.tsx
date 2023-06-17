@@ -1,35 +1,65 @@
-import { Close} from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import {
+  Box,
   Dialog,
   DialogContent,
   DialogTitle,
   IconButton,
   TextField,
   Typography,
+  styled,
 } from "@mui/material";
+import { FilledButton } from "../Home/Hero";
 
-type Props  = {
-    title: string;
-    text: string;
-    placeholder: string;
-    open: boolean;
-    handleClose: () => void
-}
+const Title = styled(DialogTitle)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+type Props = {
+  title: string;
+  text: string;
+  placeholder: string;
+  open: boolean;
+  handleClose: () => void;
+};
 
 export default function CreateDialog(props: Props) {
-  console.log("create dialog box", props)
   return (
-      <Dialog open={props.open} onClose={props.handleClose}>
-        <DialogTitle>
-            {props.title}
-        <IconButton sx={{p: 0}}>
-            <Close />
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+  
+  PaperProps={{ style: { minWidth: 400, borderRadius: 18, padding: 6, color: "#2b3c4d" } }}
+    >
+      <Title>
+        <Typography variant="h5" fontWeight={600}>
+          {props.title}
+        </Typography>
+        <IconButton sx={{ p: 0 }} onClick={props.handleClose}>
+          <Close />
         </IconButton>
-        </DialogTitle>
-        <DialogContent>
-            <Typography>{props.text}</Typography>
-          <TextField placeholder={props.placeholder} />
-        </DialogContent>
-      </Dialog>
+      </Title>
+      <DialogContent>
+        <Typography
+          variant="subtitle2"
+          mb={1}
+          mt={0.5}
+          fontWeight={500}
+        >
+          {props.text}
+        </Typography>
+        <TextField
+          placeholder={props.placeholder}
+          style={{ marginBottom: 20 }}
+          fullWidth
+        />
+        <Box textAlign="right">
+          <FilledButton variant="contained" sx={{ width: "50%" }}>
+            Continue
+          </FilledButton>
+        </Box>
+      </DialogContent>
+    </Dialog>
   );
 }
