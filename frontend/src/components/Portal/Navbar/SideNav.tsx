@@ -111,6 +111,3 @@ export default function SideNav() {
     </SideWrapper>
   );
 }
-
-//link on select styles
-// close folder on tab changes

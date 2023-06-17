@@ -209,4 +209,3 @@ export default function Pricing() {
     </PricingSection>
   );
 }
-//match the color scheme
