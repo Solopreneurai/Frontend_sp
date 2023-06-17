@@ -29,8 +29,14 @@ export default function CreateDialog(props: Props) {
     <Dialog
       open={props.open}
       onClose={props.handleClose}
-  
-  PaperProps={{ style: { minWidth: 400, borderRadius: 18, padding: 6, color: "#2b3c4d" } }}
+      PaperProps={{
+        style: {
+          minWidth: 400,
+          borderRadius: 18,
+          padding: 6,
+          color: "#2b3c4d",
+        },
+      }}
     >
       <Title>
         <Typography variant="h5" fontWeight={600}>
@@ -41,16 +47,16 @@ export default function CreateDialog(props: Props) {
         </IconButton>
       </Title>
       <DialogContent>
-        <Typography
-          variant="subtitle2"
-          mb={1}
-          mt={0.5}
-          fontWeight={500}
-        >
+        <Typography variant="subtitle2" mb={1} mt={0.5}>
           {props.text}
         </Typography>
         <TextField
           placeholder={props.placeholder}
+          sx={{
+            border: "1px solid #cbd6e2",
+            borderRadius: "10px",
+            "& fieldset": { border: "none" },
+          }}
           style={{ marginBottom: 20 }}
           fullWidth
         />
