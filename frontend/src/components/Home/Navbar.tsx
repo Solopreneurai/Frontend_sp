@@ -5,12 +5,9 @@ import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 const NavSection = styled(Box)({
-  display: "flex",
   position: "fixed",
   padding: "8px 64px",
   width: "100%",
-  justifyContent: "space-between",
-  alignItems: "center",
   boxShadow: "20px 20px 60px #d9d9d9",
   zIndex: "2147483647",
   backgroundColor: "#fff",
@@ -65,7 +62,7 @@ const NavList = () => {
 
 export default function Navbar() {
   return (
-    <NavSection>
+    <NavSection className="flex">
       <Image src={Icon} />
       <NavList />
     </NavSection>

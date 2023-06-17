@@ -26,9 +26,6 @@ const Title = styled(Typography)({
   color: "#fff",
 });
 const ContactDiv = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
   padding: "40px 0",
 });
 
@@ -99,7 +96,7 @@ export default function Footer() {
           </Box>
         </FooterInfo>
       </FooterContent>
-      <ContactDiv>
+      <ContactDiv className="flex">
         <Box> 2023 Copyrights. All Rights Reserved</Box>
         <Box sx={{display: 'flex', gap: '25px'}}>
           <Facebook fontSize="medium" />

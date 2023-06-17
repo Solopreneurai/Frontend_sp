@@ -67,11 +67,7 @@ function Folder() {
       >
         <Box
           mb={3}
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+          className="flex"
         >
           <IconButton sx={{ p: 0 }} onClick={handleFolder}>
             <KeyboardDoubleArrowLeft

@@ -7,15 +7,9 @@ import {
   IconButton,
   TextField,
   Typography,
-  styled,
 } from "@mui/material";
 import { FilledButton } from "../Home/Hero";
 
-const Title = styled(DialogTitle)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});
 type Props = {
   title: string;
   text: string;
@@ -38,14 +32,14 @@ export default function CreateDialog(props: Props) {
         },
       }}
     >
-      <Title>
+      <DialogTitle className="flex">
         <Typography variant="h5" fontWeight={600}>
           {props.title}
         </Typography>
         <IconButton sx={{ p: 0 }} onClick={props.handleClose}>
           <Close />
         </IconButton>
-      </Title>
+      </DialogTitle>
       <DialogContent>
         <Typography variant="subtitle2" mb={1} mt={0.5}>
           {props.text}
