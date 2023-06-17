@@ -1,34 +1,14 @@
-import { Avatar, Box, Typography, styled } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 
 type Props = {
-  id: string;
+  title: string;
 };
 
-const HeaderBox = styled(Box)({
-  padding: "40px 30px 10px 30px",
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-export default function Header({ id }: Props) {
-
-  const headerContent = (id: string) => {
-    switch (id) {
-      case "bot":
-        return "ChatBot Builder";
-      case "resources":
-        return "Resources";
-      case "earn":
-        return "Earn";
-      default:
-        return "";
-    }
-  };
-
+export default function Header({ title }: Props) {
   return (
-    <HeaderBox>
-      <Typography fontSize={40} fontWeight={600}>{headerContent(id)}</Typography>
+    <Box className="portal-header">
+      <Typography fontSize={40} fontWeight={600}>{title}</Typography>
       <Avatar sx={{ bgcolor: "#ff5c35" }}>N</Avatar>
-    </HeaderBox>
+    </Box>
   );
 }
