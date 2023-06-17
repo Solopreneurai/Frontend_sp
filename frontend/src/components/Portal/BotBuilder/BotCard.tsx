@@ -45,7 +45,7 @@ function BotCard({ botList }: Props) {
           <Typography variant="h6" fontWeight={600} mb={2}>
             {bot.name}
           </Typography>
-          <Link to={`/portal/bot/${bot.id}`} >
+          <Link to={`/portal/bot/${bot.id}`} state={{ bot: bot}} >
           <FilledButton variant="contained" onClick={() => {}} fullWidth>View</FilledButton>
 
           </Link>
@@ -56,6 +56,3 @@ function BotCard({ botList }: Props) {
 }
 
 export default BotCard;
-
-//take array of bots in input and display a grid of bots
-// on view bot, show the bot in details

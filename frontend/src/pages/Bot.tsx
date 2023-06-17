@@ -1,5 +1,6 @@
 import { Box, Tabs, Tab, styled, Typography, Divider, Avatar } from "@mui/material"
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = styled(Box)({
   padding: "20px 30px 10px 30px",
@@ -7,7 +8,6 @@ const Header = styled(Box)({
   gap: '10px',
   overflow:'scroll'
 })
-
 const TabStyle = styled(Tab)({
   color: "#2b3c4d",
   "&.MuiButtonBase-root.MuiTab-root.Mui-selected": {
@@ -16,7 +16,6 @@ const TabStyle = styled(Tab)({
     color: "white",
   },
 });
-
 const ContentWrapper = styled(Box)({
   padding: '20px 30px'
 })
@@ -27,12 +26,12 @@ function Bot() {
     console.log(e)
     setValue(() => val)
   }
-  const name = "temp";
+  const { bot } = useLocation().state
 
   return (
     <div>
         <Header>
-          <Typography variant="h4" fontWeight={600}>{name} </Typography>
+          <Typography variant="h4" fontWeight={600}>{bot?.name} </Typography>
         <Tabs
           value={value}
           onChange={handleChange}
