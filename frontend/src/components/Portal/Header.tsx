@@ -11,19 +11,14 @@ const HeaderBox = styled(Box)({
 });
 
 export default function Header({ id }: Props) {
-  console.log(id);
 
   const headerContent = (id: string) => {
     switch (id) {
-      case "1":
-        return "Library";
-      case "2":
-        return "History";
-      case "3":
+      case "bot":
         return "ChatBot Builder";
-      case "4":
+      case "resources":
         return "Resources";
-      case "5":
+      case "earn":
         return "Earn";
       default:
         return "";

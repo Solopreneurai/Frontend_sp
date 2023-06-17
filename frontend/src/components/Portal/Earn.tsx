@@ -1,6 +1,10 @@
+import Header from "./Header"
+
 function Earn() {
   return (
-    <div></div>
+    <div>
+      <Header id='earn' />
+    </div>
   )
 }
 

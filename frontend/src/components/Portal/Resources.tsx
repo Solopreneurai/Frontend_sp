@@ -1,7 +1,10 @@
+import Header from "./Header"
 
 function Resources() {
   return (
-    <div></div>
+    <div>
+      <Header id="resources" />
+    </div>
   )
 }
 
