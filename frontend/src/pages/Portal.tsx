@@ -1,45 +1,36 @@
-import { useState } from "react";
-import SideNav from "../components/Portal/SideNav";
+import SideNav from "../components/Portal/Navbar/SideNav";
 import { Box, styled } from "@mui/material";
-import Header from "../components/Portal/Header";
-import Library from "../components/Portal/Library"
-import History from "../components/Portal/History"
-import Builder from "../components/Portal/Builder";
+import Builder from "../components/Portal/BotBuilder/Builder";
 import Resources from "../components/Portal/Resources";
 import Earn from "../components/Portal/Earn";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Bot from "./Bot";
 
 const MainWrapper = styled(Box)({
-  marginLeft: '250px',
+  marginLeft: "250px",
   color: "#2b3c4d",
-})
+});
 
 export default function Portal() {
-  const [tab, setTab] = useState('1')
-
-  const Content = (id: string) => {
-    switch (id) {
-      case "1":
-        return <Library />;
-      case "2":
-        return <History />;
-      case "3":
-        return <Builder />;
-      case "4":
-        return <Resources />;
-      case "5":
-        return <Earn />;
-      default:
-        return "";
-    }
-  }
-
   return (
     <div>
-      <SideNav id={tab} setTab={setTab} />
+      <SideNav />
       <MainWrapper>
-        <Header id={tab} />
-        {Content(tab)}
+        <Routes>
+          <Route
+            path="/*"
+            element={
+                <Routes>
+                  <Route path="/" element={<Navigate  to="/portal/bot" />} />
+                  <Route path='/bot' element={<Builder />} />
+                  <Route path='/earn' element={<Earn />} />
+                  <Route path='/resources' element={<Resources />} />
+                </Routes>
+            }
+          />
+          <Route path="/bot/:id" element={<Bot />} />
+        </Routes>
       </MainWrapper>
     </div>
-  )
+  );
 }
