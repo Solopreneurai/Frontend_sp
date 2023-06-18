@@ -5,20 +5,22 @@ import {
   Bolt,
   StickyNote2,
   Paid,
+  AddCircleOutline,
 } from "@mui/icons-material/";
 import logo from "../../../assets/chatbot-logo.png";
-import CreateNew from "./CreateNew";
 import Folder from "./Folder";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import CreateDialog from "../CreateDialog";
 
 const SideWrapper = styled(Box)({
   position: "fixed",
-  backgroundColor: "#2b3c4d",
+  backgroundColor: 'var(--main-color)',
   width: "250px",
   height: "100vh",
   top: 0,
   padding: "20px 25px",
-  color: "#cbd6e2",
+  color: "var(--main-light-color)",
   overflow: "scroll",
   zIndex: '900'
 });
@@ -33,6 +35,9 @@ const NavBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
   gap: "12px",
+  "& .active" : {
+    color: 'var(--white-color)'
+  }
 });
 const CustomBox = styled(Link)({
   color: 'inherit',
@@ -41,13 +46,17 @@ const CustomBox = styled(Link)({
   alignItems: "center",
   textDecoration: 'none',
   ":hover": {
-    color: "#fff",
+    color: "var(--white-color)",
     cursor: "pointer",
   },
 });
 
 export default function SideNav() {
- 
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen((open) => !open);
+  };
+
   return (
     <SideWrapper>
       <Logo>
@@ -56,7 +65,27 @@ export default function SideNav() {
           AI Builder
         </Typography>
       </Logo>
-      <CreateNew />   
+
+       <div>
+      <FilledButton
+        variant="contained"
+        className="side-nav-btn"
+        startIcon={<AddCircleOutline style={{ fontSize: "14px" }} />}
+        style={{ gap: 0 }}
+        fullWidth
+        onClick={handleClose}
+      >
+        Create New
+      </FilledButton>
+
+      <CreateDialog
+        open={open}
+        handleClose={handleClose}
+        title="New Project"
+        text="Project Name"
+        placeholder="Enter the name of project"
+      />
+    </div> 
 
       <NavBox mb={3} mt={4}>
         <Folder />
