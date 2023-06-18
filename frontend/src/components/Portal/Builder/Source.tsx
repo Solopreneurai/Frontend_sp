@@ -7,12 +7,12 @@ import { FilledButton } from "../../Home/Hero";
 
 const UploadContainer = styled(Box)({
   padding: 20,
-  background: "var(--light-blue)",
+  background: "#f6f9fc",
   flexDirection: "column",
   borderRadius: "20px",
 });
 const List = styled(TabList)({
-  background: "var(--main-light-color)",
+  background: "#cbd6e2",
   borderRadius: "12px",
   padding: "3px 4px",
   alignItems: "center",
@@ -23,8 +23,8 @@ const List = styled(TabList)({
   },
   ".MuiButtonBase-root.MuiTab-root.Mui-selected": {
     borderRadius: "12px",
-    background: "var(--white-color)",
-    color: "var(--secondary-light-color)",
+    background: "#fff",
+    color: "#ff7f53",
   },
 });
 const TabStyle = styled(Tab)({

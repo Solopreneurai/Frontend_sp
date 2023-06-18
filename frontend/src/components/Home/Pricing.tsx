@@ -8,13 +8,13 @@ const PricingSection = styled(Box)({
 
 const Table = styled(Box)({
   display: "grid",
-  border: "1px solid var(--light-orange)",
+  border: "1px solid #ffebe6",
   position: "relative",
   "& .head": {
-    backgroundColor: "var(--secondary-light-color)",
+    backgroundColor: "#ff7f53",
     position: "sticky",
     top: "100px",
-    color: "var(--white-color)",
+    color: "#fff",
   },
   "@media screen and (max-width: 991px)": {
     overflow: "auto",
@@ -38,7 +38,7 @@ const Cell = styled(Box)({
   alignItems: "center",
   justifyContent: "center",
   padding: "16px",
-  border: "1px solid var(--light-orange)",
+  border: "1px solid #ffebe6",
   borderStyle: "none solid solid none",
   "&:first-of-type": {
     justifyContent: "flex-start",

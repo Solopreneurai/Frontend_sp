@@ -20,10 +20,10 @@ const Header = styled(Box)({
   overflow: "scroll",
 });
 const TabStyle = styled(Tab)({
-  color: "var(--main-color)",
+  color: "#2b3c4d",
   textTransform: "none",
   "&.MuiButtonBase-root.MuiTab-root.Mui-selected": {
-    color: "var(--secondary-color)",
+    color: "#ff5c35",
   },
 });
 const ContentWrapper = styled(Box)({
@@ -31,7 +31,7 @@ const ContentWrapper = styled(Box)({
   height: '100%',
 });
 const PreviewBox = styled(Box)({
-  background: "var(--light-blue)",
+  background: "#f6f9fc",
   padding: "20px",
   flex: 1,
   maxWidth: 450
@@ -63,7 +63,7 @@ export default function Bot() {
           </Typography>
           <TabList
             TabIndicatorProps={{
-              style: { background: "var(--secondary-light-color)"},
+              style: { background: "#ff7f53"},
             }}
             onChange={handleChange}
             variant="scrollable"
@@ -74,7 +74,7 @@ export default function Bot() {
             ))}
           </TabList>
 
-          <Avatar sx={{ bgcolor: "var(--secondary-color)" }}>N</Avatar>
+          <Avatar sx={{ bgcolor: "#ff5c35" }}>N</Avatar>
         </Header>
         <Divider />
         <ContentWrapper>

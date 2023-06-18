@@ -21,23 +21,23 @@ const Text = styled(Box)({
   gap: "2px",
 });
 export const FilledButton = styled(Button)({
-  backgroundColor: "var(--secondary-light-color)",
+  backgroundColor: "#ff7f53",
   fontWeight: 600,
   textTransform: "none",
   ":hover": {
-    backgroundColor: "var(--secondary-color)",
+    backgroundColor: "#ff5c35",
   },
   padding: "10px 30px",
 });
 export const OutlinedButton = styled(Button)({
-  borderColor: "var(--secondary-light-color)",
-  color: "var(--secondary-color)",
+  borderColor: "#ff7f53",
+  color: "#ff5c35",
   padding: "10px 30px",
   textTransform: "none",
   fontWeight: 600,
   ":hover": {
-    borderColor: "var(--secondary--light-color)",
-    backgroundColor: "var(--light-orange)",
+    borderColor: "#ff7f53",
+    backgroundColor: "#ffebe6",
   },
 });
 
@@ -46,10 +46,10 @@ export default function Hero() {
     <HeroSection>
       <Box maxWidth="800px">
         <Typography variant="h2" fontWeight={800} mb={3}>
-          A <span style={{ color: "var(--secondary-color)" }}>No-Code Custom</span> AI Chatbot
+          A <span style={{ color: "#ff5c35" }}>No-Code Custom</span> AI Chatbot
           Support Builder
         </Typography>
-        <Typography variant="h6" color="var(--main-blue)">
+        <Typography variant="h6" color="#304457">
           Centralizing all of your data on your website without writing any code
           is simple with an AI chatbot builder. By educating AI chatbot on your
           own data, you may prepare your knowledge-base chat.
@@ -57,19 +57,19 @@ export default function Hero() {
       </Box>
       <CustomBox>
         <Text>
-          <CheckCircle fontSize="small" style={{ color: "var(--secondary-color)" }} />
+          <CheckCircle fontSize="small" style={{ color: "#ff5c35" }} />
           <Typography variant="subtitle2" fontWeight={600}>
             Free and Paid Plans
           </Typography>
         </Text>
         <Text>
-          <CheckCircle fontSize="small" style={{ color: "var(--secondary-color)" }} />
+          <CheckCircle fontSize="small" style={{ color: "#ff5c35" }} />
           <Typography variant="subtitle2" fontWeight={600}>
             Setup in Minutes
           </Typography>
         </Text>
         <Text>
-          <CheckCircle fontSize="small" style={{ color: "var(--secondary-color)" }} />
+          <CheckCircle fontSize="small" style={{ color: "#ff5c35" }} />
           <Typography variant="subtitle2" fontWeight={600}>
             No credit card required
           </Typography>

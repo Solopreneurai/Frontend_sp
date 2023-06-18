@@ -10,7 +10,7 @@ const NavSection = styled(Box)({
   width: "100%",
   boxShadow: "20px 20px 60px #d9d9d9",
   zIndex: "2147483647",
-  backgroundColor: "var(--white-color)",
+  backgroundColor: "#fff",
 });
 const Image = styled("img")({
   height: "50px",

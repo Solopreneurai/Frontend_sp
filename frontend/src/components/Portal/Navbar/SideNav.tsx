@@ -15,12 +15,12 @@ import CreateDialog from "../CreateDialog";
 
 const SideWrapper = styled(Box)({
   position: "fixed",
-  backgroundColor: 'var(--main-color)',
+  backgroundColor: '#2b3c4d',
   width: "250px",
   height: "100vh",
   top: 0,
   padding: "20px 25px",
-  color: "var(--main-light-color)",
+  color: "#cbd6e2",
   overflow: "scroll",
   zIndex: '900'
 });
@@ -36,7 +36,7 @@ const NavBox = styled(Box)({
   flexDirection: "column",
   gap: "12px",
   "& .active" : {
-    color: 'var(--white-color)'
+    color: '#fff'
   }
 });
 const CustomBox = styled(Link)({
@@ -46,7 +46,7 @@ const CustomBox = styled(Link)({
   alignItems: "center",
   textDecoration: 'none',
   ":hover": {
-    color: "var(--white-color)",
+    color: "#fff",
     cursor: "pointer",
   },
 });

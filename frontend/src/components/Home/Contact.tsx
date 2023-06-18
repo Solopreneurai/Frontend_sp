@@ -28,7 +28,7 @@ export default function Contact() {
           variant="h4"
           fontWeight={600}
           mb={1}
-          color="var(--secondary-color)"
+          color="#ff5c35"
         >
           Our support heroes are here for you 24/7
         </Typography>

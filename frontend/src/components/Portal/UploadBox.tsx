@@ -3,7 +3,7 @@ import { NoteAddOutlined } from "@mui/icons-material/";
 
 const Container = styled(Box)({
   flexDirection: "column",
-  border: '2px dotted var(--secondary-color)',
+  border: '2px dotted #ff5c35',
   borderRadius: '10px',
   width: '100%',
   padding: '32px 42px'
@@ -17,11 +17,11 @@ export default function UploadBox(props: Props) {
     <Container className="flex">
       <IconButton sx={{ p: 0 }}>
         <NoteAddOutlined
-          style={{ color: "var(--secondary-light-color)", fontSize: 36 }}
+          style={{ color: "#ff7f53", fontSize: 36 }}
         />
       </IconButton>
       <Typography variant="h6" fontWeight={600} mt={2}>{props.text}</Typography>
-      <Typography variant="body2" color="var(--gray)">{props.subText}</Typography>
+      <Typography variant="body2" color="#6b7280">{props.subText}</Typography>
     </Container>
   );
 }
