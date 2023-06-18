@@ -9,7 +9,6 @@ const ContactSection = styled(Box)({
   padding: "100px 60px",
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
-  color: "#2b3c4d",
   gap: "30px",
   overflowX: "hidden",
 });
@@ -25,12 +24,17 @@ export default function Contact() {
           Contact us
         </Typography>
 
-        <Typography variant="h4" fontWeight={600} mb={1} color="#ff5c35">
+        <Typography
+          variant="h4"
+          fontWeight={600}
+          mb={1}
+          color="var(--secondary-color)"
+        >
           Our support heroes are here for you 24/7
         </Typography>
         <Typography variant="h6" mb={4}>
-          Effortlessly connect your Popupsmart account with your preferred
-          service provider to maximize website conversions.
+          Effortlessly create a custom trained ai chatbot for your site and if
+          you need any help feel free to book a call or chat with us.
         </Typography>
         <CustomBox style={{ justifyContent: "flex-start" }}>
           <FilledButton variant="contained">Book Meeting</FilledButton>

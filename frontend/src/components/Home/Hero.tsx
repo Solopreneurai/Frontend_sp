@@ -25,7 +25,7 @@ export const FilledButton = styled(Button)({
   fontWeight: 600,
   textTransform: "none",
   ":hover": {
-    backgroundColor: "var(--secondary-light-color)",
+    backgroundColor: "var(--secondary-color)",
   },
   padding: "10px 30px",
 });
