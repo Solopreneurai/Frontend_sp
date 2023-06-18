@@ -10,7 +10,6 @@ const Container = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  color: "#2b3c4d",
 });
 
 export default function Login() {
