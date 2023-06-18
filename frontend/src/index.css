@@ -1,5 +1,16 @@
+:root {
+  --main-color: #2b3c4d;
+  --main-light-color: #cbd6e2;
+  --secondary-color: #ff5c35;
+  --secondary-light-color: #ff7f53;
+  --light-orange: #ffebe6;
+  --main-blue: #304457;
+  --light-blue: #f6f9fc;
+  --white-color: #fff;
+}
 body {
   margin: 0;
+  color: var(--main-color)
 }
 * {
   box-sizing: border-box;
