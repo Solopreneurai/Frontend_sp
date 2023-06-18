@@ -1,21 +1,20 @@
 import { Box, styled, Typography } from "@mui/material";
-import { HorizontalRule, CheckCircle } from "@mui/icons-material/";
+import { pricingData } from "../../utils/constants";
 
 const PricingSection = styled(Box)({
   padding: "100px 20px",
-  color: "#2b3c4d",
   width: "100%",
 });
 
 const Table = styled(Box)({
   display: "grid",
-  border: "1px solid #ffebe6",
+  border: "1px solid var(--light-orange)",
   position: "relative",
   "& .head": {
-    backgroundColor: "#ff5c35",
+    backgroundColor: "var(--secondary-light-color)",
     position: "sticky",
     top: "100px",
-    color: "#fff",
+    color: "var(--white-color)",
   },
   "@media screen and (max-width: 991px)": {
     overflow: "auto",
@@ -39,7 +38,7 @@ const Cell = styled(Box)({
   alignItems: "center",
   justifyContent: "center",
   padding: "16px",
-  border: "1px solid #ffebe6",
+  border: "1px solid var(--light-orange)",
   borderStyle: "none solid solid none",
   "&:first-of-type": {
     justifyContent: "flex-start",
@@ -53,118 +52,6 @@ const columns = [
   { id: "4", name: "Growth" },
   { id: "5", name: "Essential" },
   { id: "6", name: "Enterprise" },
-];
-
-interface RowData {
-  id: string;
-  feat: string;
-  free: string | React.ReactElement;
-  start: string | React.ReactElement;
-  grow: string | React.ReactElement;
-  essential: string | React.ReactElement;
-  enterprise: string | React.ReactElement;
-}
-
-const pricingData: RowData[] = [
-  {
-    id: "1",
-    feat: "Pricing",
-    free: "$0",
-    start: "$19",
-    grow: "$49",
-    essential: "$99",
-    enterprise: "$499",
-  },
-  {
-    id: "2",
-    feat: "Chatbots",
-    free: "1",
-    start: "2",
-    grow: "5",
-    essential: "15",
-    enterprise: "50",
-  },
-  {
-    id: "3",
-    feat: "Message Credits",
-    free: "30",
-    start: "2000",
-    grow: "5000",
-    essential: "10000",
-    enterprise: "40000(beyond this use your own openai key)",
-  },
-  {
-    id: "4",
-    feat: "Training Methods",
-    free: "1 page",
-    start: "25 pages",
-    grow: "100 pages & 5 PDF",
-    essential: "500 pages & 20 PDF",
-    enterprise: "5000 pages & 50 PDF",
-  },
-  {
-    id: "5",
-    feat: "Chatbot Guidelines",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <CheckCircle style={{ color: "#ff5c35" }} />,
-    grow: <CheckCircle style={{ color: "#ff5c35" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
-  {
-    id: "6",
-    feat: "Chatlog History",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <CheckCircle style={{ color: "#ff5c35" }} />,
-    grow: <CheckCircle style={{ color: "#ff5c35" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
-  {
-    id: "7",
-    feat: "Analytics",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <CheckCircle style={{ color: "#ff5c35" }} />,
-    grow: <CheckCircle style={{ color: "#ff5c35" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
-  {
-    id: "8",
-    feat: "Rule/Wildcard setting",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    grow: <CheckCircle style={{ color: "#ff5c35" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
-  {
-    id: "9",
-    feat: "Chat trigger",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    grow: <CheckCircle style={{ color: "#ff5c35" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
-  {
-    id: "10",
-    feat: "Integrations",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    grow: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
-  {
-    id: "11",
-    feat: "Remove Branding",
-    free: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    start: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    grow: <HorizontalRule style={{ color: "#2b3c4d55" }} />,
-    essential: <CheckCircle style={{ color: "#ff5c35" }} />,
-    enterprise: <CheckCircle style={{ color: "#ff5c35" }} />,
-  },
 ];
 
 export default function Pricing() {

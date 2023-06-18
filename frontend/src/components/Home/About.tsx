@@ -6,9 +6,8 @@ import { useEffect } from "react";
 
 const AboutSection = styled(Box)({
   padding: "100px 200px 20px 200px",
-  backgroundColor: "#ffebe6",
+  backgroundColor: "var(--light-orange)",
   width: "100%",
-  color: "#2b3c4d",
   textAlign: 'center'
 });
 export default function About() {
@@ -20,7 +19,7 @@ export default function About() {
       <Typography variant="h2" fontWeight={800}>
         Make customer engagement easy and fun!
       </Typography>
-      <Typography variant="h6" mt={4} color="#304457">
+      <Typography variant="h6" mt={4} color="var(--main-blue)">
         Integrate human-like conversations without human interaction, no code.
         Turn your knowledge base into a customized chatbot AI chatbot builder is
         not your regular AI bot platform. 

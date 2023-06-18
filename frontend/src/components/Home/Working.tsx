@@ -8,7 +8,6 @@ import { useEffect } from "react";
 const WorkSection = styled(Box)({
   padding: "100px 60px",
   width: "100%",
-  color: "#2b3c4d",
   display: "flex",
   alignItems: "center",
   flexDirection: "column",

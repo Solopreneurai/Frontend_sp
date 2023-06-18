@@ -3,8 +3,8 @@ import logo from "../../assets/chatbot-logo.png";
 import { LinkedIn, Twitter, Instagram, Facebook, YouTube } from "@mui/icons-material";
 
 const FooterSection = styled(Box)({
-  backgroundColor: "#2b3c4d",
-  color: "#cbd6e2",
+  backgroundColor: "var(--main-color)",
+  color: "var(--main-light-color)",
   width: "100%",
   padding: "0 100px",
 });
