@@ -4,6 +4,7 @@ import {Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Portal from './pages/Portal'
+import Bot from './pages/Bot'
 // import Bot from './pages/Bot'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/portal/*" element={<Portal />} />
+          <Route path="/portal/bot/:id" element={<Bot />} />
         </Routes>
     </div>
   )
