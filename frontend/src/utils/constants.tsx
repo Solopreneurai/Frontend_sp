@@ -145,3 +145,31 @@ export const faqData = [
     ans: "If you exceed your plan's limits for projects or pages, we will notify you. However, if you exceed the token limit for your plan, your chatbots will stop generating AI responses and will instead respond with a predefined message.",
   },
 ];
+
+export const customFormData = [
+  {
+    id: "1",
+    label: "Bot Name",
+    placeholder: "Enter the name of bot",
+    defaultValue: "",
+  },
+  {
+    id: "2",
+    label: "Company Name",
+    placeholder: "Enter the name of company",
+    defaultValue: "Solopreneur",
+  },
+  {
+    id: "3",
+    label: "Chatbot Color",
+    placeholder: "Pick the color for your chatbot",
+    defaultValue: "",
+  },
+  { id: "4", label: "Chatbot Subheading", placeholder: "", defaultValue: "" },
+  {
+    id: "5",
+    label: "Chatbot Input Placeholder",
+    placeholder: "",
+    defaultValue: "",
+  },
+];

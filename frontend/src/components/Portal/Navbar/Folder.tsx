@@ -7,6 +7,7 @@ import {
   styled,
   InputAdornment,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -65,10 +66,7 @@ function Folder() {
           style: { padding: 24, left: 250, color: "#2b3c4d" },
         }}
       >
-        <Box
-          mb={3}
-          className="flex"
-        >
+        <Box mb={3} className="flex">
           <IconButton sx={{ p: 0 }} onClick={handleFolder}>
             <KeyboardDoubleArrowLeft
               style={{
@@ -76,13 +74,15 @@ function Folder() {
               }}
             />
           </IconButton>
-          <IconButton sx={{ p: 0 }}>
-            <HelpOutlineOutlined
-              style={{
-                color: "#2b3c4d",
-              }}
-            />
-          </IconButton>
+          <Tooltip title="Projects allow you to systematically organize your content">
+            <IconButton sx={{ p: 0 }}>
+              <HelpOutlineOutlined
+                style={{
+                  color: "#2b3c4d",
+                }}
+              />
+            </IconButton>
+          </Tooltip>
         </Box>
 
         <Typography variant="h4" mb={2} fontWeight={600}>

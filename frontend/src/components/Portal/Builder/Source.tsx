@@ -8,7 +8,6 @@ import { FilledButton } from "../../Home/Hero";
 const UploadContainer = styled(Box)({
   padding: 20,
   background: "#f6f9fc",
-  flexDirection: "column",
   borderRadius: "20px",
 });
 const List = styled(TabList)({
@@ -53,7 +52,7 @@ export default function Source() {
     setInput(() => val);
   };
   return (
-    <Box>
+    <>
       <Typography variant="h5" fontWeight={600}>
         Source
       </Typography>
@@ -81,21 +80,50 @@ export default function Source() {
               />
             ))}
           </List>
-          <Box></Box>
           <TabPanel style={{ width: "100%", padding: "20px" }} value="1">
             <UploadBox
               text="Click to upload a file or drag and drop it here"
               subText="Up to 10MB in size, PDF, DOC, DOCX"
             />
           </TabPanel>
-          <TabPanel value="2">add a link</TabPanel>
-          <TabPanel value="3">add a sitemap</TabPanel>
-          <TabPanel value="4">add frequently asked question</TabPanel>
+          <TabPanel value="2">
+            <Box>
+              expandable list 
+            </Box>
+          </TabPanel>
+          <TabPanel value="3">
+            <Typography variant="h6" fontWeight={600} align="left">
+              Upload URLs in bulk
+            </Typography>
+            <Typography variant="body1" mb={2} color="#6b7280" align="left">
+              Download our template, add all URLs in the sheet, and upload
+              instantly.
+            </Typography>
+
+            <UploadBox
+              text="Click to upload a file or drag and drop it here"
+              subText="Upto 100MB in size. CSV (See template above)."
+            />
+          </TabPanel>
+          <TabPanel value="4">
+            <Typography variant="h6" fontWeight={600} align="left">
+              Upload FAQs in bulk
+            </Typography>
+            <Typography variant="body1" mb={2} color="#6b7280" align="left">
+              Download our template, add all QnAs in the sheet, and upload
+              instantly.
+            </Typography>
+
+            <UploadBox
+              text="Add QnA in bulk"
+              subText="Upto 10MB in size. CSV (See template above)."
+            />
+          </TabPanel>
         </TabContext>
         <FilledButton variant="contained" disabled>
           Upload and train
         </FilledButton>
       </UploadContainer>
-    </Box>
+    </>
   );
 }

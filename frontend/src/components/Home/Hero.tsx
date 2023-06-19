@@ -1,5 +1,6 @@
-import { Box, styled, Typography, Button } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material/";
+import { LoadingButton } from "@mui/lab";
 
 const HeroSection = styled(Box)({
   display: "flex",
@@ -20,7 +21,7 @@ const Text = styled(Box)({
   display: "flex",
   gap: "2px",
 });
-export const FilledButton = styled(Button)({
+export const FilledButton = styled(LoadingButton)({
   backgroundColor: "#ff7f53",
   fontWeight: 600,
   textTransform: "none",
@@ -29,7 +30,7 @@ export const FilledButton = styled(Button)({
   },
   padding: "10px 30px",
 });
-export const OutlinedButton = styled(Button)({
+export const OutlinedButton = styled(LoadingButton)({
   borderColor: "#ff7f53",
   color: "#ff5c35",
   padding: "10px 30px",
