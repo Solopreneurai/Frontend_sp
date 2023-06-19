@@ -6,7 +6,8 @@ const Container = styled(Box)({
   border: '2px dotted #ff5c35',
   borderRadius: '10px',
   width: '100%',
-  padding: '32px 42px'
+  padding: '32px 42px',
+  overflow: 'auto'
 });
 type Props = {
   text: string;
