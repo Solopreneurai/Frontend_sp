@@ -1,6 +1,7 @@
-import { Person, Visibility } from "@mui/icons-material";
+import { Person, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
+  IconButton,
   InputAdornment,
   TextField,
   Typography,
@@ -40,6 +41,10 @@ interface Props {
 }
 export default function SignIn({ setLogin }: Props) {
   const [changePswd, setPswd] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword((showPassword) => !showPassword);
+  };
   return (
     <LoginBox>
       {changePswd ? (
@@ -65,12 +70,14 @@ export default function SignIn({ setLogin }: Props) {
               fullWidth
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Visibility />
+                    <IconButton sx={{p: 0}} onClick={handleShowPassword}>
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}
@@ -82,7 +89,14 @@ export default function SignIn({ setLogin }: Props) {
               Login
             </FilledButton>
           </Link>
-          <Typography variant="body2" fontWeight={700} color="#ff5c35" style={{cursor: 'pointer'}} mt={2} onClick={() => setPswd((pswd) => !pswd)}>
+          <Typography
+            variant="body2"
+            fontWeight={700}
+            color="#ff5c35"
+            style={{ cursor: "pointer" }}
+            mt={2}
+            onClick={() => setPswd((pswd) => !pswd)}
+          >
             Forgot your password ?
           </Typography>
 

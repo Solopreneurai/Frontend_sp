@@ -1,15 +1,19 @@
-import { InputAdornment, Typography } from "@mui/material";
+import { IconButton, InputAdornment, Typography } from "@mui/material";
 import { FilledButton } from "../Home/Hero";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Form, Input, LoginBox } from "./SignIn";
-import { Mail, Person, Visibility } from "@mui/icons-material";
+import { Mail, Person, Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface Props {
   setLogin: Dispatch<SetStateAction<boolean>>;
 }
 export default function SignUp({ setLogin }: Props) {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword((showPassword) => !showPassword);
+  };
   return (
-    <LoginBox style={{paddingTop: 50}}>
+    <LoginBox style={{ paddingTop: 50 }}>
       <Typography variant="h4" fontWeight={600} mb={1}>
         Get started
       </Typography>
@@ -39,11 +43,13 @@ export default function SignUp({ setLogin }: Props) {
         />
         <Input
           placeholder="Enter your password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <Visibility />
+                <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
               </InputAdornment>
             ),
           }}
@@ -51,11 +57,13 @@ export default function SignUp({ setLogin }: Props) {
         />
         <Input
           placeholder="Confirm your password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <Visibility />
+                <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
               </InputAdornment>
             ),
           }}
@@ -79,7 +87,7 @@ export default function SignUp({ setLogin }: Props) {
           Login
         </a>
       </Typography>
-      <Typography fontSize={10} mt={2} >
+      <Typography fontSize={10} mt={2}>
         By creating an account, you are agreeing to our Terms of Service and
         Privacy Policy. You also agree to receive product-related marketing
         emails from Writesonic, which you can unsubscribe from at any time.
