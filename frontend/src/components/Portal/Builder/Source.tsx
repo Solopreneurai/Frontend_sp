@@ -10,7 +10,7 @@ const UploadContainer = styled(Box)({
   background: "#f6f9fc",
   borderRadius: "20px",
 });
-const List = styled(TabList)({
+export const List = styled(TabList)({
   background: "#cbd6e2",
   borderRadius: "12px",
   padding: "3px 4px",
@@ -26,7 +26,7 @@ const List = styled(TabList)({
     color: "#ff7f53",
   },
 });
-const TabStyle = styled(Tab)({
+export const TabStyle = styled(Tab)({
   textTransform: "none",
   minHeight: 0,
   padding: "12px",

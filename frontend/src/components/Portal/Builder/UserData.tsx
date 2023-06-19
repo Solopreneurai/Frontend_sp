@@ -1,7 +1,11 @@
-function UserData() {
-  return (
-    <div>UserData</div>
-  )
-}
+import { Typography } from "@mui/material";
 
-export default UserData
+export default function UserData() {
+  return (
+    <>
+      <Typography variant="h5" fontWeight={600} mb={2}>
+        User Data
+      </Typography>
+    </>
+  );
+}
