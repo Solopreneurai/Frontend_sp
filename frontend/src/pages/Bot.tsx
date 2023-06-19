@@ -1,9 +1,14 @@
-import { Box, Tab, styled, Typography, Divider, Avatar, IconButton } from "@mui/material";
+import {
+  Box,
+  styled,
+  Typography,
+  Divider,
+  Avatar,
+  IconButton,
+} from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
+import { Fullscreen } from "@mui/icons-material/";
 import Source from "../components/Portal/Builder/Source";
 import Customize from "../components/Portal/Builder/Customize";
 import UserData from "../components/Portal/Builder/UserData";
@@ -11,85 +16,69 @@ import Starter from "../components/Portal/Builder/Starter";
 import Conversation from "../components/Portal/Builder/Conversation";
 import Embeddings from "../components/Portal/Builder/Embeddings";
 import Analytics from "../components/Portal/Builder/Analytics";
-import { Fullscreen } from '@mui/icons-material/';
+import SideNav from "../components/Portal/Navbar/SideNav";
 
 const Header = styled(Box)({
-  padding: "30px 30px 0px 30px",
-  display: "flex",
-  gap: "16px",
-  overflow: "scroll",
+  padding: "30px 30px 10px 30px",
 });
-const TabStyle = styled(Tab)({
-  color: "#2b3c4d",
-  textTransform: "none",
-  "&.MuiButtonBase-root.MuiTab-root.Mui-selected": {
-    color: "#ff5c35",
-  },
-});
+
 const ContentWrapper = styled(Box)({
   display: "flex",
-  height: '100%',
+  height: "100%",
+  overflow: "auto",
+  flex: 1,
 });
 const PreviewBox = styled(Box)({
   background: "#f6f9fc",
   padding: "20px",
   flex: 1,
-  maxWidth: 450
+  maxWidth: 450,
 });
 
 export default function Bot() {
   const [value, setValue] = useState("1");
-  const handleChange = (e: React.SyntheticEvent, val: string) => {
-    console.log(e)
-    setValue(() => val);
-  };
+
   const { bot } = useLocation().state;
-  const data = [
-    { id: "1", label: "Source", element: <Source /> },
-    { id: "2", label: "Customize", element: <Customize /> },
-    { id: "3", label: "Starter Questions", element: <Starter /> },
-    { id: "4", label: "User Data", element: <UserData /> },
-    { id: "5", label: "Conversations", element: <Conversation /> },
-    { id: "6", label: "Embeddings", element: <Embeddings /> },
-    { id: "7", label: "Analytics", element: <Analytics /> },
-  ];
-
+  const renderElement = (value: string) => {
+    switch (value) {
+      case "1":
+        return <Source />;
+      case "2":
+        return <Customize name={bot?.name} />;
+      case "3":
+        return <Starter />;
+      case "4":
+        return <UserData />;
+      case "5":
+        return <Conversation />;
+      case "6":
+        return <Embeddings />;
+      case "7":
+        return <Analytics />;
+    }
+  };
   return (
-    <div style={{height: '100%'}}>
-      <TabContext value={value}>
-        <Header>
-          <Typography variant="h4" fontWeight={600}>
-            {bot?.name}{" "}
-          </Typography>
-          <TabList
-            TabIndicatorProps={{
-              style: { background: "#ff7f53"},
-            }}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons={false}
-          >
-            {data.map((item) => (
-              <TabStyle key={item.id} label={item.label} value={item.id} />
-            ))}
-          </TabList>
-
-          <Avatar sx={{ bgcolor: "#ff5c35" }}>N</Avatar>
-        </Header>
-        <Divider />
-        <ContentWrapper>
-          {data.map((item) => (
-            <TabPanel style={{overflow: 'auto', flex: 1}} key={item.id} value={item.id}>
-              {item.element}
-            </TabPanel>
-          ))}
-          <PreviewBox>
-            <IconButton sx={{p: 0}}>
-              <Fullscreen />
-            </IconButton>
-          </PreviewBox>
-        </ContentWrapper>
-      </TabContext>
+    <div>
+      <SideNav show setTabId={setValue} name={bot?.name} />
+      <Box ml={32} height="100vh">
+        <Box height="100%" display="flex" flexDirection="column">
+          <Header className="flex">
+            <Typography variant="h4" fontWeight={600}>
+              {bot?.name}{" "}
+            </Typography>
+            <Avatar sx={{ bgcolor: "#ff5c35" }}>N</Avatar>
+          </Header>
+          <Divider />
+          <ContentWrapper>
+            <Box sx={{flex: 1, display: 'flex', flexDirection: 'column', overflow:'auto', padding: '10px 20px'}}>{renderElement(value)}</Box>
+            <PreviewBox style={{ display: value === "5" ? "none" : "block" }}>
+              <IconButton sx={{ p: 0 }}>
+                <Fullscreen />
+              </IconButton>
+            </PreviewBox>
+          </ContentWrapper>
+        </Box>
+      </Box>
     </div>
   );
 }

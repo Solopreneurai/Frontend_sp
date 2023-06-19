@@ -4,13 +4,13 @@ import BotList from "../components/Portal/BotDetails/BotList";
 import Resources from "../components/Portal/Resources";
 import Earn from "../components/Portal/Earn";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Bot from "./Bot";
+// import Bot from "./Bot";
 
 export default function Portal() {
   return (
     <div>
       <SideNav />
-      <Box ml={32} height='100vh' overflow='hidden'>
+      <Box ml={32} height='100vh'>
         <Routes>
           <Route
             path="/*"
@@ -23,7 +23,6 @@ export default function Portal() {
                 </Routes>
             }
           />
-          <Route path="/bot/:id" element={<Bot />} />
         </Routes>
       </Box>
     </div>
