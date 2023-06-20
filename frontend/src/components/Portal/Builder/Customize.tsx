@@ -9,6 +9,8 @@ import {
 import { FilledButton } from "../../Home/Hero";
 import { InfoOutlined } from "@mui/icons-material";
 import { customFormData } from "../../../utils/constants";
+import Logo from "../../../assets/chatbot-logo.png";
+import FileUploadText from "./FileUploadText";
 
 const Form = styled(Box)({
   padding: "20px 0",
@@ -16,17 +18,22 @@ const Form = styled(Box)({
   gridTemplateColumns: "repeat(2, 1fr)",
   gap: "50px",
 });
-
 export const Input = styled(InputBase)({
   border: "1px solid #cbd6e2",
   padding: "10px 16px",
   borderRadius: "10px",
 });
+const CustomBox = styled(Box)({
+  display: "flex",
+  gap: "5px",
+  alignItems: "center",
+});
 
 type Props = {
   name: string;
 };
-function Customize(props: Props) {
+
+export default function Customize(props: Props) {
   return (
     <>
       <Box className="flex">
@@ -42,15 +49,12 @@ function Customize(props: Props) {
           {customFormData.map((data) => (
             <Box key={data.id}>
               <InputLabel htmlFor={data.id}>
-                <Box
-                  style={{ display: "flex", gap: "5px", alignItems: "center" }}
-                  mb={0.5}
-                >
+                <CustomBox mb={0.5}>
                   <Typography fontSize={12}>{data.label}</Typography>
                   <IconButton sx={{ p: 0 }}>
                     <InfoOutlined style={{ fontSize: 14, color: " #cbd6e2" }} />
                   </IconButton>
-                </Box>
+                </CustomBox>
               </InputLabel>
               <Input
                 fullWidth
@@ -64,31 +68,33 @@ function Customize(props: Props) {
         </Box>
         <Box>
           <InputLabel>
-            <Box
-              style={{ display: "flex", gap: "5px", alignItems: "center" }}
-              mb={0.5}
-            >
+            <CustomBox mb={1.5}>
               <Typography fontSize={12}>Company Logo</Typography>
               <IconButton sx={{ p: 0 }}>
                 <InfoOutlined style={{ fontSize: 14, color: " #cbd6e2" }} />
               </IconButton>
-            </Box>
+            </CustomBox>
           </InputLabel>
+          <FileUploadText
+            text="Upload Logo"
+            defaultSrc={Logo}
+            subText="JPG/PNG up to 5 MB"
+          />
           <InputLabel>
-            <Box
-              style={{ display: "flex", gap: "5px", alignItems: "center" }}
-              mb={0.5}
-            >
+            <CustomBox mt={3} mb={1.5}>
               <Typography fontSize={12}>Chatbot Picture</Typography>
               <IconButton sx={{ p: 0 }}>
                 <InfoOutlined style={{ fontSize: 14, color: " #cbd6e2" }} />
               </IconButton>
-            </Box>
+            </CustomBox>
           </InputLabel>
+          <FileUploadText
+            text="Upload Logo"
+            defaultSrc={Logo}
+            subText="JPG/PNG up to 5 MB"
+          />
         </Box>
       </Form>
     </>
   );
 }
-
-export default Customize;
