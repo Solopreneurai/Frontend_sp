@@ -1,9 +1,10 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Typography, Box, styled, Tab } from "@mui/material";
+import { Typography, Box, styled, Tab, IconButton } from "@mui/material";
 import { useState } from "react";
 import UploadBox from "../UploadBox";
-import { UploadFile, AddLink, Quiz } from "@mui/icons-material/";
+import { UploadFile, AddLink, Quiz, Add } from "@mui/icons-material/";
 import { FilledButton } from "../../Home/Hero";
+import { Input } from "./Customize";
 
 const UploadContainer = styled(Box)({
   padding: 20,
@@ -40,7 +41,7 @@ const IconBox = styled(Box)({
 
 const tabs = [
   { id: "1", text: "Upload File", icon: <UploadFile /> },
-  { id: "2", text: "Add a Link", icon: <AddLink /> },
+  { id: "2", text: "Enter a Link", icon: <AddLink /> },
   { id: "3", text: "Add sitemap", icon: <AddLink /> },
   { id: "4", text: "FAQ", icon: <Quiz /> },
 ];
@@ -51,6 +52,7 @@ export default function Source() {
     console.log(e);
     setInput(() => val);
   };
+  // const urlList = []
   return (
     <>
       <Typography variant="h5" fontWeight={600}>
@@ -87,8 +89,23 @@ export default function Source() {
             />
           </TabPanel>
           <TabPanel value="2">
-            <Box>
-              expandable list 
+            <Box sx={{ p: 2, background: "white", borderRadius: "12px", 
+  boxShadow: "20px 20px 60px #d9d9d9",
+
+           }}>
+              <Typography fontSize={12} align="left" ml={0.5} mb={0.5}>
+                Enter website url : 
+              </Typography>
+              <Box className="flex">
+                <Input
+                  placeholder="Enter a website URL"
+                  style={{ padding: "4px 8px" }}
+                  fullWidth
+                />
+                <IconButton>
+                  <Add />
+                </IconButton>
+              </Box>
             </Box>
           </TabPanel>
           <TabPanel value="3">
