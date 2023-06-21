@@ -14,6 +14,8 @@ import Folder from "./Folder";
 import { Link } from "react-router-dom";
 import { Dispatch, SetStateAction, useState } from "react";
 import CreateDialog from "../CreateDialog";
+import { BotCardDetails } from "../BotDetails/BotCard";
+import {tabs} from "../../../utils/constants"
 
 const SideWrapper = styled(Box)({
   position: "fixed",
@@ -32,7 +34,6 @@ const Logo = styled(Box)({
   gap: "20px",
   paddingBottom: "12px",
 });
-
 const NavBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
@@ -58,22 +59,34 @@ type Props = {
   name?: string;
   setTabId?: Dispatch<SetStateAction<string>>;
 };
+export interface FolderDetails {
+  id: string;
+  name: string;
+  bots: BotCardDetails[]
+}
+const folder: FolderDetails[] = [
+  {
+    id: "1",
+    name: "New Folder",
+    bots: [
+      { id: "1", name: "temp" },
+      { id: "2", name: "Solopreneur" },
+      { id: "3", name: "AI bot 1" },
+    ]
+  }
+]
 
 export default function SideNav(props: Props) {
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen((open) => !open);
   };
-  const tabs = [
-    { id: "1", name: "Source" },
-    { id: "2", name: "Customize" },
-    { id: "3", name: "Starter Questions" },
-    { id: "4", name: "User Data" },
-    { id: "5", name: "Conversations" },
-    { id: "6", name: "Embeddings" },
-    { id: "7", name: "Analytics" },
-  ];
-
+  const [folderName, setFolder] = useState(folder[0].name)
+  const [folderList, setFolderList] = useState(folder)
+  const handleFolder = (folder: FolderDetails) => {
+    setFolderList((prev) => [...prev, folder])
+    setOpen((open) => !open)
+  }
   return (
     <SideWrapper>
       <Logo>
@@ -83,29 +96,19 @@ export default function SideNav(props: Props) {
         </Typography>
       </Logo>
 
-      <div>
-        <FilledButton
-          variant="contained"
-          className="side-nav-btn"
-          startIcon={<AddCircleOutline style={{ fontSize: "14px" }} />}
-          style={{ gap: 0 }}
-          fullWidth
-          onClick={handleClose}
-        >
-          Create New
-        </FilledButton>
-
-        <CreateDialog
-          open={open}
-          handleClose={handleClose}
-          title="New Project"
-          text="Project Name"
-          placeholder="Enter the name of project"
-        />
-      </div>
+      <FilledButton
+        variant="contained"
+        className="side-nav-btn"
+        startIcon={<AddCircleOutline style={{ fontSize: "14px" }} />}
+        style={{ gap: 0 }}
+        fullWidth
+        onClick={handleClose}
+      >
+        Create New
+      </FilledButton>
 
       <NavBox mb={3} mt={4}>
-        <Folder />
+        <Folder name={folderName} list={folderList} setFolder={setFolder}  />
         <NavBox p={1} mt={1}>
           <CustomBox to="/portal/bot">
             {props.show ? (
@@ -125,9 +128,16 @@ export default function SideNav(props: Props) {
             )}
           </CustomBox>
 
-          {props?.show ? (
+          {props?.show && (
             <>
-              <Box style={{ cursor: "pointer", display: 'flex', alignItems:'center', gap: '10px' }}>
+              <Box
+                style={{
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
                 <Description fontSize="small" />
                 <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
                   {props?.name}
@@ -147,8 +157,6 @@ export default function SideNav(props: Props) {
                 ))}
               </NavBox>
             </>
-          ) : (
-            <></>
           )}
         </NavBox>
       </NavBox>
@@ -181,6 +189,17 @@ export default function SideNav(props: Props) {
           </Typography>
         </CustomBox>
       </NavBox>
+      {open && (
+        <CreateDialog
+          edit={false}
+          handleClose={handleClose}
+          title="New Project"
+          text="Project Name"
+          placeholder="Enter the name of project"
+          handleList={handleFolder}
+          folder
+        />
+      )}
     </SideWrapper>
   );
 }

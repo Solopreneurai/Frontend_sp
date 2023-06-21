@@ -9,12 +9,15 @@ import {
   TextField,
   Tooltip,
 } from "@mui/material";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   KeyboardDoubleArrowLeft,
   HelpOutlineOutlined,
   Search,
+  Edit,
+  Delete,
 } from "@mui/icons-material/";
+import { FolderDetails } from "./SideNav";
 
 const SelectButton = styled(Button)({
   color: "inherit",
@@ -41,9 +44,29 @@ const SearchBox = styled(TextField)({
   background: "#fff",
   border: "1px solid #cbd6e2",
   "& fieldset": { border: "none" },
+  marginBottom: '16px'
 });
+const FolderBox = styled(Box)({
+  padding: '20px', 
+  background: '#f6f9fc',
+  fontWeight: 600,
+  borderRadius: '10px',
+  marginBottom: '8px'
 
-function Folder() {
+})
+const IconBox=styled(Box)({
+  display: 'flex',
+  gap: '8px',
+  alignItems: 'center'
+})
+
+type Props = {
+  name: string;
+  list: FolderDetails[]
+  setFolder: Dispatch<SetStateAction<string>>
+}
+
+export default function Folder(props: Props) {
   const [openFolder, setOpen] = useState(false);
   const handleFolder = () => {
     setOpen((openFolder) => !openFolder);
@@ -104,9 +127,20 @@ function Folder() {
           }}
           fullWidth
         />
+        {props.list.map((item) =>
+        <FolderBox className="flex" key={item.id}>
+          {item.name}
+          <IconBox>
+            <IconButton sx={{background: 'white'}}>
+              <Edit style={{fontSize: 14}} />
+            </IconButton>
+            <IconButton sx={{background: 'white'}}>
+              <Delete style={{fontSize: 14}} />
+            </IconButton>
+          </IconBox>
+        </FolderBox>
+        )}
       </Drawer>
     </div>
   );
 }
-
-export default Folder;
