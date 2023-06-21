@@ -12,7 +12,8 @@ type Props = {
   defaultSrc?: string;
   subText: string;
 };
-function FileUploadText(props: Props) {
+
+export default function FileUploadText(props: Props) {
   const handleChange = (e: React.SyntheticEvent) => {
     console.log(e);
   };
@@ -39,7 +40,7 @@ function FileUploadText(props: Props) {
           >
             <input
               type="file"
-              accept="image/*"
+              accept="image/png, image/jpeg"
               style={{ opacity: 0, width: "100%", height: "100%" }}
               onChange={handleChange}
             />
@@ -52,13 +53,4 @@ function FileUploadText(props: Props) {
       </Typography>
     </Box>
   );
-}
-
-export default FileUploadText;
-
-{
-  /* <img id="blah" alt="your image" width="100" height="100" />
-
-<input type="file" 
-    onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"></input> */
 }

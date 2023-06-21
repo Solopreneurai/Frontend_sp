@@ -173,3 +173,13 @@ export const customFormData = [
     defaultValue: "",
   },
 ];
+
+export const tabs = [
+  { id: "1", name: "Source" },
+  { id: "2", name: "Customize" },
+  { id: "3", name: "Starter Questions" },
+  { id: "4", name: "User Data" },
+  { id: "5", name: "Conversations" },
+  { id: "6", name: "Embeddings" },
+  { id: "7", name: "Analytics" },
+];

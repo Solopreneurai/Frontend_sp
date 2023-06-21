@@ -12,6 +12,7 @@ const CustomList = styled(List)({
 export default function Embeddings() {
   const [tab, setTab] = useState("1");
   const handleTab = (e: React.SyntheticEvent, val: string) => {
+    console.log(e)
     setTab(() => val);
   };
   const tabs = [

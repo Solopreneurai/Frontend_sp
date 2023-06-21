@@ -9,19 +9,26 @@ import {
   Typography,
 } from "@mui/material";
 import { FilledButton } from "../Home/Hero";
+import { useState } from "react";
+import { v4 as uuid } from 'uuid';
 
 type Props = {
+  id?: string;
+  edit: boolean
   title: string;
   text: string;
   placeholder: string;
-  open: boolean;
+  handleList: (obj: any) => void
   handleClose: () => void;
+  folder?: boolean;
 };
 
 export default function CreateDialog(props: Props) {
+  const [input, setInput] = useState("")
+
   return (
     <Dialog
-      open={props.open}
+      open={true}
       onClose={props.handleClose}
       PaperProps={{
         style: {
@@ -33,9 +40,7 @@ export default function CreateDialog(props: Props) {
       }}
     >
       <DialogTitle className="flex">
-        <Typography variant="h5" fontWeight={600}>
           {props.title}
-        </Typography>
         <IconButton sx={{ p: 0 }} onClick={props.handleClose}>
           <Close />
         </IconButton>
@@ -45,6 +50,7 @@ export default function CreateDialog(props: Props) {
           {props.text}
         </Typography>
         <TextField
+        value={input}
           placeholder={props.placeholder}
           sx={{
             border: "1px solid #cbd6e2",
@@ -52,10 +58,11 @@ export default function CreateDialog(props: Props) {
             "& fieldset": { border: "none" },
           }}
           style={{ marginBottom: 20 }}
+          onChange={(e) => setInput(() => e.target.value)}
           fullWidth
         />
         <Box textAlign="right">
-          <FilledButton variant="contained" sx={{ width: "50%" }}>
+          <FilledButton variant="contained" disabled={input.length ? false : true} sx={{ width: "50%" }} onClick={() => props.folder ? props.handleList({id: props.edit ? props.id : uuid(), name: input, bots: []}) : props.handleList({id: props.edit ? props.id : uuid(), name: input}) }>
             Continue
           </FilledButton>
         </Box>
