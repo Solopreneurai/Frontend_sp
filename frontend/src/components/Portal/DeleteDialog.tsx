@@ -8,9 +8,10 @@ import {
 import { FilledButton, OutlinedButton } from "../Home/Hero";
 
 type Props = {
-  id: string;
-  handleClose: (id: string) => void;
-  handleDelete: (id: string) => void;
+  type: string;
+  object: Object;
+  handleClose: (obj: any) => void;
+  handleDelete: (obj: any) => void;
 };
 
 export default function DeleteDialog(props: Props) {
@@ -29,7 +30,7 @@ export default function DeleteDialog(props: Props) {
     >
       <DialogTitle className="flex">
         <Typography fontSize={24} fontWeight={600}>
-          Delete bot
+          Delete {props.type}
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -40,14 +41,14 @@ export default function DeleteDialog(props: Props) {
         <Box textAlign="right">
           <OutlinedButton
             variant="outlined"
-            onClick={() => props.handleClose(props.id)}
+            onClick={() => props.handleClose(props.object)}
             style={{marginRight: 12}}
           >
             Cancel
           </OutlinedButton>
           <FilledButton
             variant="contained"
-            onClick={() => props.handleDelete(props.id)}
+            onClick={() => props.handleDelete(props.object)}
           >
             Continue
           </FilledButton>

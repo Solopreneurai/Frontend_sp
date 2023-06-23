@@ -19,7 +19,7 @@ type Props = {
   text: string;
   placeholder: string;
   handleList: (obj: any) => void
-  handleClose: () => void;
+  handleClose: (obj: any) => void;
   folder?: boolean;
 };
 
@@ -62,7 +62,7 @@ export default function CreateDialog(props: Props) {
           fullWidth
         />
         <Box textAlign="right">
-          <FilledButton variant="contained" disabled={input.length ? false : true} sx={{ width: "50%" }} onClick={() => props.folder ? props.handleList({id: props.edit ? props.id : uuid(), name: input, bots: []}) : props.handleList({id: props.edit ? props.id : uuid(), name: input}) }>
+          <FilledButton variant="contained" disabled={input.length ? false : true} sx={{ width: "50%" }} onClick={() => props.folder ? props.handleList({id: props.edit ? props.id : uuid(), name: input}) : props.handleList({id: props.edit ? props.id : uuid(), name: input}) }>
             Continue
           </FilledButton>
         </Box>

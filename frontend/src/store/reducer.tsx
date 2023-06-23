@@ -28,7 +28,6 @@ export function reducer(state: State = initialState, action: Action): State {
         currentFolderId: action.payload
      }
     case DELETE_FOLDER:
-        console.log("in reducer calling delete folder")
       return {
         ...state,
         folderList: state.folderList.filter((item) => {
@@ -41,6 +40,7 @@ export function reducer(state: State = initialState, action: Action): State {
     case CREATE_FOLDER:
       return {
         ...state,
+        currentFolderId: action.payload.id,
         folderList: [
           ...state.folderList,
           {
@@ -50,7 +50,6 @@ export function reducer(state: State = initialState, action: Action): State {
         ],
       };
     case EDIT_FOLDER:
-        console.log("in reducer calling edit folder function")
       return {
         ...state,
         folderList: state.folderList.map((folder) =>
