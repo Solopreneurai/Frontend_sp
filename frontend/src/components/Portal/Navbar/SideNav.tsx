@@ -14,8 +14,10 @@ import Folder from "./Folder";
 import { Link } from "react-router-dom";
 import { Dispatch, SetStateAction, useState } from "react";
 import CreateDialog from "../CreateDialog";
-import { BotCardDetails } from "../BotDetails/BotCard";
-import {tabs} from "../../../utils/constants"
+import { tabs } from "../../../utils/constants";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createFolder, selectFolder } from "../../../store/actions";
 
 const SideWrapper = styled(Box)({
   position: "fixed",
@@ -24,28 +26,35 @@ const SideWrapper = styled(Box)({
   height: "100vh",
   top: 0,
   padding: "20px 25px",
-  color: "#cbd6e2",
-  overflow: "scroll",
+  color: " #cbd6e299",
   zIndex: "900",
+  display: 'flex',
+  flexDirection: 'column'
 });
 const Logo = styled(Box)({
   display: "flex",
   alignItems: "center",
   gap: "20px",
-  paddingBottom: "12px",
+  paddingBottom: "20px",
+  cursor: "pointer",
 });
 const NavBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
+  gap: "2px",
   "& .active": {
     color: "#fff",
+    borderRadius: "8px",
+    background: "linear-gradient(145deg, #2b3d4e, #33495d)",
+    boxShadow: "14px 14px 28px #19242e",
+    border: "1px solid #304457",
   },
 });
 const CustomBox = styled(Link)({
   color: "inherit",
   display: "flex",
   gap: "10px",
+  padding: "8px 12px",
   alignItems: "center",
   textDecoration: "none",
   ":hover": {
@@ -59,34 +68,27 @@ type Props = {
   name?: string;
   setTabId?: Dispatch<SetStateAction<string>>;
 };
-export interface FolderDetails {
-  id: string;
-  name: string;
-  bots: BotCardDetails[]
-}
-const folder: FolderDetails[] = [
-  {
-    id: "1",
-    name: "New Folder",
-    bots: [
-      { id: "1", name: "temp" },
-      { id: "2", name: "Solopreneur" },
-      { id: "3", name: "AI bot 1" },
-    ]
-  }
-]
 
 export default function SideNav(props: Props) {
   const [open, setOpen] = useState(false);
+  const [Tab, setTab] = useState(window.location.hash.slice(9));
+  console.log("path", window.location.hash.slice(9))
+
+  const folder: FolderDetails[] = useSelector(
+    (state: State) => state.folderList
+  );
+  const dispatch = useDispatch();
+  const handleFolder = (folder: FolderDetails) => {
+    dispatch(selectFolder(folder.id));
+    dispatch(createFolder(folder));
+    setOpen((open) => !open);
+  };
   const handleClose = () => {
     setOpen((open) => !open);
   };
-  const [folderName, setFolder] = useState(folder[0].name)
-  const [folderList, setFolderList] = useState(folder)
-  const handleFolder = (folder: FolderDetails) => {
-    setFolderList((prev) => [...prev, folder])
-    setOpen((open) => !open)
-  }
+  const handleTabs = (id: string) => {
+    setTab(() => id);
+  };
   return (
     <SideWrapper>
       <Logo>
@@ -106,59 +108,68 @@ export default function SideNav(props: Props) {
       >
         Create New
       </FilledButton>
-
-      <NavBox mb={3} mt={4}>
-        <Folder name={folderName} list={folderList} setFolder={setFolder}  />
-        <NavBox p={1} mt={1}>
-          <CustomBox to="/portal/bot">
-            {props.show ? (
-              <>
-                <ListAlt fontSize="small" />
-                <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
-                  Your Bots
-                </Typography>
-              </>
-            ) : (
-              <>
-                <img src={logo} width={24} height={24} />
-                <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
-                  Chatbot builder
-                </Typography>
-              </>
-            )}
-          </CustomBox>
-
-          {props?.show && (
+      <Box mt={3} mb={1}>
+        <Folder list={folder} />
+      </Box>
+      <Box overflow="scroll">
+      <NavBox mb={2}>
+        <CustomBox
+          to="/portal/bot"
+          className={`${Tab === "bot" ? "active" : ""}`}
+          onClick={() => handleTabs("bot")}
+        >
+          {props.show ? (
             <>
-              <Box
-                style={{
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <Description fontSize="small" />
-                <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
-                  {props?.name}
-                </Typography>
-              </Box>
-              <NavBox ml={3} gap="8px">
-                {tabs.map((tab) => (
-                  <Box
-                    style={{ cursor: "pointer" }}
-                    onClick={() => props.setTabId?.(() => tab.id)}
-                    key={tab.id}
-                  >
-                    <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
-                      {tab.name}
-                    </Typography>
-                  </Box>
-                ))}
-              </NavBox>
+              <ListAlt fontSize="small" />
+              <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
+                Your Bots
+              </Typography>
+            </>
+          ) : (
+            <>
+              <img src={logo} width={24} height={24} />
+              <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
+                Chatbot builder
+              </Typography>
             </>
           )}
-        </NavBox>
+        </CustomBox>
+
+        {props?.show && (
+          <>
+            <Box
+              style={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "6px 12px",
+              }}
+            >
+              <Description fontSize="small" />
+              <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
+                {props?.name}
+              </Typography>
+            </Box>
+            <NavBox ml={2} gap="8px">
+              {tabs.map((tab) => (
+                <Box
+                  style={{ cursor: "pointer", padding: "5px 16px" }}
+                  onClick={() => {
+                    props.setTabId?.(() => tab.id);
+                    handleTabs(tab.id);
+                  }}
+                  className={`${Tab === tab.id ? "active" : ""}`}
+                  key={tab.id}
+                >
+                  <Typography variant="subtitle1" fontWeight={600} pt={0.5}>
+                    {tab.name}
+                  </Typography>
+                </Box>
+              ))}
+            </NavBox>
+          </>
+        )}
       </NavBox>
 
       <OutlinedButton variant="outlined" className="side-nav-btn" fullWidth>
@@ -175,20 +186,29 @@ export default function SideNav(props: Props) {
         <Bolt />
       </FilledButton>
 
-      <NavBox mt={4} p={1}>
-        <CustomBox to="/portal/resources">
+      <NavBox mt={4}>
+        <CustomBox
+          to="/portal/resources"
+          className={`${Tab === "resources" ? "active" : ""}`}
+          onClick={() => handleTabs("resources")}
+        >
           <StickyNote2 />
           <Typography variant="body1" fontWeight={600} pt={0.25}>
             Resources
           </Typography>
         </CustomBox>
-        <CustomBox to="/portal/earn">
+        <CustomBox
+          to="/portal/earn"
+          className={`${Tab === "earn" ? "active" : ""}`}
+          onClick={() => handleTabs("earn")}
+        >
           <Paid />
           <Typography variant="body1" fontWeight={600} pt={0.25}>
             Earn with ChatBuilder
           </Typography>
         </CustomBox>
       </NavBox>
+      </Box>
       {open && (
         <CreateDialog
           edit={false}
