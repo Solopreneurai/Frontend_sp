@@ -72,8 +72,6 @@ type Props = {
 export default function SideNav(props: Props) {
   const [open, setOpen] = useState(false);
   const [Tab, setTab] = useState(window.location.hash.slice(9));
-  console.log("path", window.location.hash.slice(9))
-
   const folder: FolderDetails[] = useSelector(
     (state: State) => state.folderList
   );
@@ -81,7 +79,6 @@ export default function SideNav(props: Props) {
   const handleFolder = (folder: FolderDetails) => {
     dispatch(selectFolder(folder.id));
     dispatch(createFolder(folder));
-    setOpen((open) => !open);
   };
   const handleClose = () => {
     setOpen((open) => !open);
@@ -108,7 +105,7 @@ export default function SideNav(props: Props) {
       >
         Create New
       </FilledButton>
-      <Box mt={3} mb={1}>
+      <Box mt={2.5} mb={1.5}>
         <Folder list={folder} />
       </Box>
       <Box overflow="scroll">
