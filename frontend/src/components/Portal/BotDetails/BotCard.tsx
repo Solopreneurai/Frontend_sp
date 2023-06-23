@@ -24,13 +24,9 @@ const Header = styled(Box)({
   marginBottom: "20px",
 });
 
-export interface BotCardDetails {
-  id: string;
-  name: string;
-}
 type Props = {
   bot: BotCardDetails
-  handleDeleteDialog: (id: string) => void;
+  handleDeleteDialog: (bot: BotCardDetails) => void;
   handleName: (bot: BotCardDetails) => void
 };
 
@@ -64,7 +60,7 @@ export default function BotCard({ bot, handleDeleteDialog, handleName }: Props) 
               }}
             >
               <MenuItem onClick={() => { setOpen(() => false); handleName(bot)}}>Rename</MenuItem>
-              <MenuItem onClick={() => { setOpen(() => false); handleDeleteDialog(bot.id)}}>
+              <MenuItem onClick={() => { setOpen(() => false); handleDeleteDialog(bot)}}>
                 Delete
               </MenuItem>
             </Menu>

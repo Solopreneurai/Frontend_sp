@@ -1,12 +1,16 @@
 import { Box, Typography, styled, Chip, Divider } from "@mui/material";
 import NoChatBot from "../../../assets/no-chatbot.png";
-import BotCard, { BotCardDetails } from "./BotCard";
+import BotCard from "./BotCard";
 import { FilledButton } from "../../Home/Hero";
 import { AddCircleOutline } from "@mui/icons-material";
 import CreateDialog from "../CreateDialog";
 import { useState } from "react";
 import Header from "../Header";
 import DeleteDialog from "../DeleteDialog";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteBot, createBot, editBot } from "../../../store/actions";
+import noFolder from "../../../assets/empty.png";
 
 const Wrapper = styled(Box)({
   padding: "10px 30px",
@@ -22,45 +26,50 @@ const BotGrid = styled(Box)({
   margin: "30px 0",
 });
 
-const bots = [
-  { id: "1", name: "temp" },
-  { id: "2", name: "Solopreneur" },
-  { id: "3", name: "AI bot 1" },
-];
-
 export default function BotList() {
-  const [botList, setBotList] = useState<BotCardDetails[]>(bots);
-  const [botId, setBotId] = useState("");
-  const [createBot, setCreate] = useState(false);
-  const [editBot, setEditBot] = useState(false);
+  const botList: BotCardDetails[] | [] = useSelector((state: State) =>
+    state.botList.filter((bot) => state.currentFolderId === bot.folderId)
+  );
+  const folderList: FolderDetails[] | [] = useSelector(
+    (state: State) => state.folderList
+  );
+  const dispatch = useDispatch();
+
+  const [bot, setBot] = useState<BotCardDetails>({
+    id: "",
+    name: "",
+    folderId: "",
+  });
+  const [createBotDialog, setCreate] = useState(false);
+  const [editBotDialog, setEditBot] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
 
-  const handleDeleteDialog = (name: string) => {
-    setBotId(() => name);
+  const handleDeleteDialog = (bot: BotCardDetails) => {
+    setBot(() => bot);
     setDeleteDialog((open) => !open);
   };
-  const handleEditClose = () => {
-    setEditBot((open) => !open)
-  }
-  const handleEditName = (bot: BotCardDetails) => {
-    setBotId(() => bot.id)
-    setEditBot((open) => !open)
-    console.log("Renaming the bot", bot);
-    setBotList(() => botList.map((item) => item.id === bot.id ? bot : item))
+  const handleEditDialog = (bot: BotCardDetails) => {
+    setBot(() => bot);
+    setEditBot((open) => !open);
   };
-  const handleDelete = (id: string) => {
-    setBotList(() => botList.filter((item) => item.id !== id));
+  const handleEditName = (bot: BotCardDetails) => {
+    setEditBot((open) => !open);
+    dispatch(editBot(bot));
+  };
+  const handleDelete = (bot: BotCardDetails) => {
+    dispatch(deleteBot(bot));
+    console.log(dispatch(deleteBot(bot)));
     setDeleteDialog((open) => !open);
   };
   const handleNewBot = (bot: BotCardDetails) => {
-    setBotList((prev) => [...prev, bot])
-    setCreate((open) => !open)
+    dispatch(createBot(bot));
+    setCreate((open) => !open);
   };
 
   const handleBotClose = () => {
     setCreate((open) => !open);
   };
-  return (
+  return folderList.length ? (
     <div>
       <Box>
         <Header title="Chatbot Builder" />
@@ -70,7 +79,7 @@ export default function BotList() {
               <Typography variant="h4" fontWeight={600}>
                 Your Bots
               </Typography>
-              <Chip label={bots.length} style={{ fontWeight: 600 }} />
+              <Chip label={botList.length} style={{ fontWeight: 600 }} />
             </Box>
 
             <div>
@@ -92,7 +101,7 @@ export default function BotList() {
                   key={bot.id}
                   bot={bot}
                   handleDeleteDialog={handleDeleteDialog}
-                  handleName={handleEditName}
+                  handleName={handleEditDialog}
                 />
               ))}
             </BotGrid>
@@ -104,9 +113,9 @@ export default function BotList() {
         </Wrapper>
       </Box>
 
-      {createBot && (
+      {createBotDialog && (
         <CreateDialog
-        edit={false}
+          edit={false}
           title="New Bot"
           text="What would you like to name your bot"
           placeholder="Enter the name of bot"
@@ -117,22 +126,39 @@ export default function BotList() {
 
       {deleteDialog && (
         <DeleteDialog
-          id={botId}
+          type="bot"
+          object={bot}
           handleClose={handleDeleteDialog}
           handleDelete={handleDelete}
         />
       )}
-      {editBot && (
+      {editBotDialog && (
         <CreateDialog
-          edit={true}
-          id={botId}
+          edit
+          id={bot.id}
           title="Rename Bot"
           text="What would you like to name your bot"
           placeholder="Enter the name of bot"
           handleList={handleEditName}
-          handleClose={handleEditClose}
+          handleClose={handleEditDialog}
         />
       )}
+    </div>
+  ) : (
+    <div
+      style={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <img src={noFolder} width="40%" />
+
+      <Typography fontSize={32} fontWeight={600}>
+        No project created
+      </Typography>
     </div>
   );
 }
