@@ -1,76 +1,27 @@
 import {
   CREATE_BOT,
-  DELETE_FOLDER,
   DELETE_BOT,
-  CREATE_FOLDER,
   EDIT_BOT,
-  EDIT_FOLDER,
-  SELECT_FOLDER,
+  LOGIN, 
 } from "./types";
 
 const initialState: State = {
   isUserLoggedIn: false,
-  currentFolderId: "1",
-  folderList: [
-    {
-      id: "1",
-      name: "New Folder",
-    },
-  ],
   botList: [],
 };
 
 export function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
-    case SELECT_FOLDER: 
-     return {
-        ...state,
-        currentFolderId: action.payload
-     }
-    case DELETE_FOLDER:
-      return {
-        ...state,
-        folderList: state.folderList.filter((item) => {
-          if (!(item.id === action.payload.id)) {
-            return item;
-          }
-        }),
-      };
-
-    case CREATE_FOLDER:
-      return {
-        ...state,
-        currentFolderId: action.payload.id,
-        folderList: [
-          ...state.folderList,
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-          },
-        ],
-      };
-    case EDIT_FOLDER:
-      return {
-        ...state,
-        folderList: state.folderList.map((folder) =>
-          folder.id === action.payload.id
-            ? {
-                id: action.payload.id,
-                name: action.payload.name,
-              }
-            : folder
-        ),
-      };
+    case LOGIN: 
+    return {
+      ...state, 
+      isUserLoggedIn: !state.isUserLoggedIn
+    }
     case DELETE_BOT:
       return {
         ...state,
         botList: state.botList.filter((item) => {
-          if (
-            !(
-              item.id === action.payload.id &&
-              item.folderId === state.currentFolderId
-            )
-          ) {
+          if (!(item.id === action.payload.id)) {
             return item;
           }
         }),
@@ -83,7 +34,6 @@ export function reducer(state: State = initialState, action: Action): State {
             ? {
                 id: action.payload.id,
                 name: action.payload.name,
-                folderId: state.currentFolderId,
               }
             : bot
         ),
@@ -96,7 +46,6 @@ export function reducer(state: State = initialState, action: Action): State {
           {
             id: action.payload.id,
             name: action.payload.name,
-            folderId: state.currentFolderId,
           },
         ],
       };

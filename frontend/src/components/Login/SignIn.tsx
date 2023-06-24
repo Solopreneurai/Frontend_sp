@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { FilledButton } from "../Home/Hero";
 import { Dispatch, SetStateAction, useState } from "react";
 import ChangePassword from "./ChangePassword";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/actions";
 
 export const Form = styled(Box)({
   margin: "20px 0",
@@ -40,11 +42,16 @@ interface Props {
   setLogin: Dispatch<SetStateAction<boolean>>;
 }
 export default function SignIn({ setLogin }: Props) {
+  const dispatch = useDispatch()
   const [changePswd, setPswd] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword((showPassword) => !showPassword);
   };
+  const handleLogin = () => {
+    console.log("trying to log in")
+    dispatch(login())
+  }
   return (
     <LoginBox>
       {changePswd ? (
@@ -84,7 +91,7 @@ export default function SignIn({ setLogin }: Props) {
               fullWidth
             />
           </Form>
-          <Link to="/portal" style={{ width: "100%" }}>
+          <Link to="/portal" style={{ width: "100%" }} onClick={handleLogin}>
             <FilledButton variant="contained" fullWidth>
               Login
             </FilledButton>
