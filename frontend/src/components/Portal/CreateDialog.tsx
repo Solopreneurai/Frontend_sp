@@ -10,22 +10,20 @@ import {
 } from "@mui/material";
 import { FilledButton } from "../Home/Hero";
 import { useState } from "react";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 type Props = {
   id?: string;
-  edit: boolean
+  edit: boolean;
   title: string;
   text: string;
   placeholder: string;
-  handleList: (obj: any) => void
+  handleList: (obj: any) => void;
   handleClose: (obj: any) => void;
-  folder?: boolean;
 };
 
 export default function CreateDialog(props: Props) {
-  const [input, setInput] = useState("")
-
+  const [input, setInput] = useState("");
   return (
     <Dialog
       open={true}
@@ -40,7 +38,7 @@ export default function CreateDialog(props: Props) {
       }}
     >
       <DialogTitle className="flex">
-          {props.title}
+        {props.title}
         <IconButton sx={{ p: 0 }} onClick={props.handleClose}>
           <Close />
         </IconButton>
@@ -50,7 +48,7 @@ export default function CreateDialog(props: Props) {
           {props.text}
         </Typography>
         <TextField
-        value={input}
+          value={input}
           placeholder={props.placeholder}
           sx={{
             border: "1px solid #cbd6e2",
@@ -62,7 +60,17 @@ export default function CreateDialog(props: Props) {
           fullWidth
         />
         <Box textAlign="right">
-          <FilledButton variant="contained" disabled={input.length ? false : true} sx={{ width: "50%" }} onClick={() => props.folder ? props.handleList({id: props.edit ? props.id : uuid(), name: input}) : props.handleList({id: props.edit ? props.id : uuid(), name: input}) }>
+          <FilledButton
+            variant="contained"
+            disabled={input.length ? false : true}
+            sx={{ width: "50%" }}
+            onClick={() =>
+              props.handleList({
+                id: props.edit ? props.id : uuid(),
+                name: input,
+              })
+            }
+          >
             Continue
           </FilledButton>
         </Box>

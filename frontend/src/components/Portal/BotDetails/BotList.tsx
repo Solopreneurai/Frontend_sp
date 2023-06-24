@@ -10,7 +10,6 @@ import DeleteDialog from "../DeleteDialog";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteBot, createBot, editBot } from "../../../store/actions";
-import noFolder from "../../../assets/empty.png";
 
 const Wrapper = styled(Box)({
   padding: "10px 30px",
@@ -27,18 +26,13 @@ const BotGrid = styled(Box)({
 });
 
 export default function BotList() {
-  const botList: BotCardDetails[] | [] = useSelector((state: State) =>
-    state.botList.filter((bot) => state.currentFolderId === bot.folderId)
-  );
-  const folderList: FolderDetails[] | [] = useSelector(
-    (state: State) => state.folderList
+  const botList: BotCardDetails[] | [] = useSelector(
+    (state: State) => state.botList
   );
   const dispatch = useDispatch();
-
   const [bot, setBot] = useState<BotCardDetails>({
     id: "",
     name: "",
-    folderId: "",
   });
   const [createBotDialog, setCreate] = useState(false);
   const [editBotDialog, setEditBot] = useState(false);
@@ -69,96 +63,79 @@ export default function BotList() {
   const handleBotClose = () => {
     setCreate((open) => !open);
   };
-  return folderList.length ? (
+  return(
     <div>
-      <Box>
-        <Header title="Chatbot Builder" />
-        <Wrapper>
-          <Box mb={2} className="flex">
-            <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-              <Typography variant="h4" fontWeight={600}>
-                Your Bots
-              </Typography>
-              <Chip label={botList.length} style={{ fontWeight: 600 }} />
-            </Box>
-
-            <div>
-              <FilledButton
-                variant="contained"
-                onClick={handleBotClose}
-                startIcon={<AddCircleOutline style={{ fontSize: "14px" }} />}
-              >
-                Create New
-              </FilledButton>
-            </div>
+    <Box>
+      <Header title="Chatbot Builder" />
+      <Wrapper>
+        <Box mb={2} className="flex">
+          <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <Typography variant="h4" fontWeight={600}>
+              Your Bots
+            </Typography>
+            <Chip label={botList.length} style={{ fontWeight: 600 }} />
           </Box>
 
-          <Divider />
-          {botList.length ? (
-            <BotGrid>
-              {botList.map((bot) => (
-                <BotCard
-                  key={bot.id}
-                  bot={bot}
-                  handleDeleteDialog={handleDeleteDialog}
-                  handleName={handleEditDialog}
-                />
-              ))}
-            </BotGrid>
-          ) : (
-            <ImgBox>
-              <img src={NoChatBot} width="40%" alt="no chatbots made" />
-            </ImgBox>
-          )}
-        </Wrapper>
-      </Box>
+          <div>
+            <FilledButton
+              variant="contained"
+              onClick={handleBotClose}
+              startIcon={<AddCircleOutline style={{ fontSize: "14px" }} />}
+            >
+              Create New
+            </FilledButton>
+          </div>
+        </Box>
 
-      {createBotDialog && (
-        <CreateDialog
-          edit={false}
-          title="New Bot"
-          text="What would you like to name your bot"
-          placeholder="Enter the name of bot"
-          handleClose={handleBotClose}
-          handleList={handleNewBot}
-        />
-      )}
+        <Divider />
+        {botList.length ? (
+          <BotGrid>
+            {botList.map((bot) => (
+              <BotCard
+                key={bot.id}
+                bot={bot}
+                handleDeleteDialog={handleDeleteDialog}
+                handleName={handleEditDialog}
+              />
+            ))}
+          </BotGrid>
+        ) : (
+          <ImgBox>
+            <img src={NoChatBot} width="40%" alt="no chatbots made" />
+          </ImgBox>
+        )}
+      </Wrapper>
+    </Box>
 
-      {deleteDialog && (
-        <DeleteDialog
-          type="bot"
-          object={bot}
-          handleClose={handleDeleteDialog}
-          handleDelete={handleDelete}
-        />
-      )}
-      {editBotDialog && (
-        <CreateDialog
-          edit
-          id={bot.id}
-          title="Rename Bot"
-          text="What would you like to name your bot"
-          placeholder="Enter the name of bot"
-          handleList={handleEditName}
-          handleClose={handleEditDialog}
-        />
-      )}
-    </div>
-  ) : (
-    <div
-      style={{
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <img src={noFolder} width="40%" />
+    {createBotDialog && (
+      <CreateDialog
+        edit={false}
+        title="New Bot"
+        text="What would you like to name your bot"
+        placeholder="Enter the name of bot"
+        handleClose={handleBotClose}
+        handleList={handleNewBot}
+      />
+    )}
 
-      <Typography fontSize={32} fontWeight={600}>
-        No project created
-      </Typography>
-    </div>
-  );
+    {deleteDialog && (
+      <DeleteDialog
+        type="bot"
+        object={bot}
+        handleClose={handleDeleteDialog}
+        handleDelete={handleDelete}
+      />
+    )}
+    {editBotDialog && (
+      <CreateDialog
+        edit
+        id={bot.id}
+        title="Rename Bot"
+        text="What would you like to name your bot"
+        placeholder="Enter the name of bot"
+        handleList={handleEditName}
+        handleClose={handleEditDialog}
+      />
+    )}
+  </div>);
 }
