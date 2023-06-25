@@ -102,7 +102,7 @@ export default function SideNav(props: Props) {
         <NavBox mb={4}>
           <CustomBox
             to="/portal/bot"
-            className={`${Tab === "bot" ? "active" : ""}`}
+            className={`${Tab === "bot" || Tab === "" ? "active" : ""}`}
             onClick={() => handleTabs("bot")}
           >
             {props.show ? (

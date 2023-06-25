@@ -17,6 +17,8 @@ import Conversation from "../components/Portal/Builder/Conversation";
 import Embeddings from "../components/Portal/Builder/Embeddings";
 import Analytics from "../components/Portal/Builder/Analytics";
 import SideNav from "../components/Portal/Navbar/SideNav";
+import Chatbot from "../components/Chatbot/Chatbot";
+import logo from "../assets/chatbot-logo.png"
 
 const Header = styled(Box)({
   padding: "30px 30px 10px 30px",
@@ -30,6 +32,7 @@ const ContentWrapper = styled(Box)({
 });
 const PreviewBox = styled(Box)({
   background: "#f6f9fc",
+  position: 'relative',
   padding: "20px",
   flex: 1,
   maxWidth: 450,
@@ -75,6 +78,7 @@ export default function Bot() {
               <IconButton sx={{ p: 0 }}>
                 <Fullscreen />
               </IconButton>
+              <Chatbot botName="solopreneur ai" headerImg={logo} />
             </PreviewBox>
           </ContentWrapper>
         </Box>
