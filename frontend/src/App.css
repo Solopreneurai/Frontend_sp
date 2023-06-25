@@ -36,3 +36,27 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+.slide-down {
+  animation: slidedown 300ms ease-in-out forwards !important;
+}
+
+@keyframes slideUp {
+  from {
+    transform: scale(0) translateY(calc(100% + 200px));
+  }
+
+  to {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slidedown {
+  from {
+    transform: scale(1) translateY(0);
+  }
+
+  to {
+    transform: scale(0) translateY(calc(100% + 200px));
+  }
+}
