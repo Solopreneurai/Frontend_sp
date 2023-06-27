@@ -74,7 +74,7 @@ export default function Bot() {
           <Divider />
           <ContentWrapper>
             <Box sx={{flex: 1, display: 'flex', flexDirection: 'column', overflow:'auto', padding: '16px 30px'}}>{renderElement(value)}</Box>
-            <PreviewBox style={{ display: value === "5" ? "none" : "block" }}>
+            <PreviewBox style={{ display: (value === "5" || value === "7") ? "none" : "block" }}>
               <IconButton sx={{ p: 0 }}>
                 <Fullscreen />
               </IconButton>
