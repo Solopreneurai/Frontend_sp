@@ -6,7 +6,7 @@ const PricingSection = styled(Box)({
   width: "100%",
 });
 
-const Table = styled(Box)({
+export const Table = styled(Box)({
   display: "grid",
   border: "1px solid #ffebe6",
   position: "relative",
@@ -24,7 +24,7 @@ const Table = styled(Box)({
   },
 });
 
-const Row = styled(Box)({
+export const Row = styled(Box)({
   display: "grid",
   gridTemplateColumns: "repeat(6, 1fr)",
   "@media screen and (max-width: 991px)": {
@@ -33,7 +33,7 @@ const Row = styled(Box)({
     overflow: "visible",
   },
 });
-const Cell = styled(Box)({
+export const Cell = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

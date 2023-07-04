@@ -1,3 +1,17 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+
+import SideNav from "../components/Portal/Navbar/SideNav";
+import Source from "../components/Portal/User/Builder/Source";
+import Customize from "../components/Portal/User/Builder/Customize";
+import UserData from "../components/Portal/User/Builder/UserData";
+import Starter from "../components/Portal/User/Builder/Starter";
+import Conversation from "../components/Portal/User/Builder/Conversation";
+import Embeddings from "../components/Portal/User/Builder/Embeddings";
+import Analytics from "../components/Portal/User/Builder/Analytics";
+import { Fullscreen } from "@mui/icons-material/";
+import Chatbot from "../components/Chatbot/Chatbot";
+import logo from "../assets/chatbot-logo.png"
 import {
   Box,
   styled,
@@ -6,19 +20,6 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Fullscreen } from "@mui/icons-material/";
-import Source from "../components/Portal/Builder/Source";
-import Customize from "../components/Portal/Builder/Customize";
-import UserData from "../components/Portal/Builder/UserData";
-import Starter from "../components/Portal/Builder/Starter";
-import Conversation from "../components/Portal/Builder/Conversation";
-import Embeddings from "../components/Portal/Builder/Embeddings";
-import Analytics from "../components/Portal/Builder/Analytics";
-import SideNav from "../components/Portal/Navbar/SideNav";
-import Chatbot from "../components/Chatbot/Chatbot";
-import logo from "../assets/chatbot-logo.png"
 
 const Header = styled(Box)({
   padding: "30px 30px 10px 30px",
@@ -40,7 +41,6 @@ const PreviewBox = styled(Box)({
 
 export default function Bot() {
   const [value, setValue] = useState("1");
-
   const { bot } = useLocation().state;
   const renderElement = (value: string) => {
     switch (value) {
@@ -60,11 +60,12 @@ export default function Bot() {
         return <Analytics />;
     }
   };
+
   return (
     <div>
-      <SideNav show setTabId={setValue} name={bot?.name} />
+      <SideNav isAdmin={false} show setTabId={setValue} name={bot?.name} />
       <Box ml={32} height="100vh">
-        <Box height="100%" display="flex" flexDirection="column">
+      <Box height="100%" display="flex" flexDirection="column">
           <Header className="flex">
             <Typography variant="h4" fontWeight={600}>
               {bot?.name}{" "}

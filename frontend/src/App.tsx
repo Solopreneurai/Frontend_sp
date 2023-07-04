@@ -6,6 +6,7 @@ import Portal from "./pages/Portal";
 import Bot from "./pages/Bot";
 import { useSelector } from "react-redux";
 import { FC, ReactNode, useState } from "react";
+import Error from "./pages/Error";
 // import { Box } from "@mui/material";
 
 interface GuardProps {
@@ -79,6 +80,7 @@ export default function App() {
           }
         />
         <Route path="/portal/bot/:id" element={<Bot />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     // </Suspense>
   );
