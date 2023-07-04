@@ -1,26 +1,49 @@
 import SideNav from "../components/Portal/Navbar/SideNav";
 import { Box } from "@mui/material";
-import BotList from "../components/Portal/BotDetails/BotList";
-import Resources from "../components/Portal/Resources";
-import Earn from "../components/Portal/Earn";
+import BotList from "../components/Portal/User/BotDetails/BotList";
+import Resources from "../components/Portal/User/Resources";
+import Earn from "../components/Portal/User/Earn";
 import { Navigate, Route, Routes } from "react-router-dom";
-// import Bot from "./Bot";
+import Admin from "../components/Portal/Admin/Admin";
+import Error from "./Error";
+import Plans from "../components/Portal/Admin/Plans";
+import Tenants from "../components/Portal/Admin/Tenants";
+import TenantList from "../components/Portal/Admin/TenantList";
 
 export default function Portal() {
+  const isAdmin = true;
   return (
     <div>
-      <SideNav />
-      <Box ml={32} height='100vh'>
+      <SideNav isAdmin={isAdmin} />
+      <Box ml={32} height="100vh">
         <Routes>
           <Route
             path="/*"
             element={
-                <Routes>
-                  <Route path="/" element={<Navigate  to="/portal/bot" />} />
-                  <Route path='/bot' element={<BotList />} />
-                  <Route path='/earn' element={<Earn />} />
-                  <Route path='/resources' element={<Resources />} />
-                </Routes>
+              <Routes>
+                {isAdmin ? (
+                  <>
+                    {/* add a profile bar for admin */}
+                    <Route path="/" element={<Navigate to="/portal/admin" />} />
+                    <Route path="/admin" element={<Admin />} />
+                    <Route path="/admin/plans" element={<Plans />} />
+                    <Route path="/admin/tenants" element={<TenantList />} />
+                    <Route path="/admin/tenants/:id" element={<Tenants />} />
+                    <Route path="*" element={<Error />} />
+                  </>
+                ) : (
+                  <>
+                    <Route
+                      path="/"
+                      element={<Navigate to="/portal/user/bot" />}
+                    />
+                    <Route path="/user/bot" element={<BotList />} />
+                    <Route path="/user/earn" element={<Earn />} />
+                    <Route path="/user/resources" element={<Resources />} />
+                    <Route path="*" element={<Error />} />
+                  </>
+                )}
+              </Routes>
             }
           />
         </Routes>
@@ -28,3 +51,4 @@ export default function Portal() {
     </div>
   );
 }
+//create protected routes else redirect to 404
