@@ -8,6 +8,7 @@ import {
 } from "@mui/icons-material";
 import { Pie } from "react-chartjs-2";
 import { useState } from "react";
+import Header from "../Header";
 
 const CustomBox = styled(Box)({
   background: "white",
@@ -86,7 +87,8 @@ const clientData = [
 export default function Admin() {
   const [value, setVal] = useState('Today')
   return (
-    <Box sx={{ p: "60px 30px", height: "100%", background: "#f6f9fc99" }}>
+    <Box sx={{ p: "0 30px 60px", height: "100%", background: "#f6f9fc99" }}>
+      <Header title="" />
       <Typography variant="h5" fontWeight={700} mb={1}>
         {" "}
         Dashboard

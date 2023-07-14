@@ -12,15 +12,19 @@ import { FilledButton } from "../Home/Hero";
 import { Dispatch, SetStateAction, useState } from "react";
 import ChangePassword from "./ChangePassword";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/actions";
+import { login, setAdmin } from "../../store/actions";
+import { useSelector } from "react-redux";
+import TextInput from "../TextInput";
+import { useForm } from "react-hook-form";
+import Form from "../Form";
 
-export const Form = styled(Box)({
-  margin: "20px 0",
-  width: "100%",
-  display: "flex",
-  gap: "20px",
-  flexDirection: "column",
-});
+// export const Form = styled(Box)({
+//   margin: "20px 0",
+//   width: "100%",
+//   display: "flex",
+//   gap: "20px",
+//   flexDirection: "column",
+// });
 export const Input = styled(TextField)({
   borderRadius: "10px",
   border: "1px solid #2b3c4d",
@@ -28,6 +32,8 @@ export const Input = styled(TextField)({
     display: "none",
   },
 });
+
+
 
 export const LoginBox = styled(Box)({
   display: "flex",
@@ -38,20 +44,38 @@ export const LoginBox = styled(Box)({
   paddingTop: "150px",
 });
 
+type FormProps = {
+  email: string;
+  password: string;
+  afterSubmit?: string;
+}
+
 interface Props {
   setLogin: Dispatch<SetStateAction<boolean>>;
 }
 export default function SignIn({ setLogin }: Props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const admin = useSelector((state: State) => state.isAdmin);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [changePswd, setPswd] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = () => {
-    setShowPassword((showPassword) => !showPassword);
-  };
+  
+  // const defaultValues = {
+  //   username: "",
+  //   password: "",
+  // };
+  // const [showPassword, setShowPassword] = useState(false);
+  // const handleShowPassword = () => {
+  //   setShowPassword((showPassword) => !showPassword);
+  // };
   const handleLogin = () => {
-    console.log("trying to log in")
-    dispatch(login())
-  }
+    console.log("trying to log in");
+    if (username === "SolopreneurAI" && password === "solopreneurai@chatbot") {
+      dispatch(setAdmin(!admin));
+    }
+    dispatch(login());
+  };
+  const { handleSubmit, control } = useForm();
   return (
     <LoginBox>
       {changePswd ? (
@@ -64,9 +88,24 @@ export default function SignIn({ setLogin }: Props) {
           <Typography variant="body1" mb={3}>
             Have we met before?
           </Typography>
-          <Form>
+          <Form methods={methods} onSubmit={handleSubmit(handleLogin)}>
+          <TextInput
+            name={username}
+            placeholder="Enter your username"
+            control={control}
+            endAdornment={
+              <InputAdornment position="end">
+                <Person />
+              </InputAdornment>
+            }
+          />
+          </Form>
+          
+          {/* <Form>
             <Input
               placeholder="Enter your username"
+              value={username}
+              onChange={(e: any) => setUsername(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -75,22 +114,26 @@ export default function SignIn({ setLogin }: Props) {
                 ),
               }}
               fullWidth
+              required
             />
             <Input
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
+              value={password}
+              onChange={(e: any) => setPassword(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton sx={{p: 0}} onClick={handleShowPassword}>
+                    <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
               fullWidth
+              required
             />
-          </Form>
+          </Form> */}
           <Link to="/portal" style={{ width: "100%" }} onClick={handleLogin}>
             <FilledButton variant="contained" fullWidth>
               Login

@@ -9,9 +9,10 @@ import Error from "./Error";
 import Plans from "../components/Portal/Admin/Plans";
 import Tenants from "../components/Portal/Admin/Tenants";
 import TenantList from "../components/Portal/Admin/TenantList";
+import { useSelector } from "react-redux";
 
 export default function Portal() {
-  const isAdmin = true;
+  const isAdmin = useSelector((state: State) => state.isAdmin);
   return (
     <div>
       <SideNav isAdmin={isAdmin} />
@@ -23,7 +24,6 @@ export default function Portal() {
               <Routes>
                 {isAdmin ? (
                   <>
-                    {/* add a profile bar for admin */}
                     <Route path="/" element={<Navigate to="/portal/admin" />} />
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/admin/plans" element={<Plans />} />

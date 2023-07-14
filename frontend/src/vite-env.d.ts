@@ -9,6 +9,7 @@ interface BotCardDetails {
 
 type State = {
   isUserLoggedIn: boolean;
+  isAdmin: boolean;
   botList: BotCardDetails[];
 };
 

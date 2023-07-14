@@ -3,15 +3,23 @@ import {
   DELETE_BOT,
   EDIT_BOT,
   LOGIN, 
+  ADMIN
 } from "./types";
 
 const initialState: State = {
   isUserLoggedIn: false,
+  isAdmin: false,
   botList: [],
 };
 
 export function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
+    case ADMIN:
+      console.log(state.isAdmin, action.payload)
+      return {
+        ...state,
+        isAdmin: action.payload
+      }
     case LOGIN: 
     return {
       ...state, 

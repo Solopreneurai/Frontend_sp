@@ -16,6 +16,7 @@ export default function Login() {
   const [login, setLogin] = useState(true);
   return (
     <Container>
+      {/* {process.env.NODE_ENV === 'development' ? import.meta.env.VITE_DEV_BASE_URL : import.meta.env.VITE_PROD_BASE_URL} */}
       <Box>
         {login ? (
          <SignIn setLogin={setLogin} />

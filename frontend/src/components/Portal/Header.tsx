@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography, Menu, MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/actions";
+import { login, setAdmin } from "../../store/actions";
 import { useState } from "react";
 
 type Props = {
@@ -16,6 +16,7 @@ export default function Header({ title }: Props) {
   };
   const dispatch = useDispatch();
   const handleLogout = () => {
+    dispatch(setAdmin(false))
     dispatch(login());
   };
   return (
