@@ -1,6 +1,6 @@
-import { Avatar, Box, Typography, Menu, MenuItem } from "@mui/material";
+import { Avatar, Box, Typography, Menu, MenuItem, Divider } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { login, setAdmin } from "../../store/actions";
+import { logout } from "../../store/actions";
 import { useState } from "react";
 
 type Props = {
@@ -16,8 +16,7 @@ export default function Header({ title }: Props) {
   };
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(setAdmin(false))
-    dispatch(login());
+    dispatch(logout());
   };
   return (
     <Box className="portal-header">
@@ -37,6 +36,8 @@ export default function Header({ title }: Props) {
             horizontal: "left",
           }}
         >
+          <MenuItem>Profile</MenuItem>
+          <Divider />
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </div>
