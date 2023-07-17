@@ -1,9 +1,8 @@
-import { FormControl, TextField, styled } from "@mui/material";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { Box, FormControl, TextField, styled } from "@mui/material";
+import { Controller, useFormContext } from "react-hook-form";
 
 type Props = {
   name: string;
-  control: Control<FieldValues>;
   type?: string;
   placeholder: string;
   endAdornment?: JSX.Element;
@@ -17,11 +16,18 @@ export const Input = styled(TextField)({
   },
 });
 
+const Error = styled(Box)({
+  minHeight: '24px',
+  fontSize: '12px',
+  color: 'red',
+})
+
 export default function TextInput(props: Props) {
+  const { control } = useFormContext()
   return (
     <Controller
       name={props.name}
-      control={props.control}
+      control={control}
       render={({ field, fieldState: { error } }: any) => (
         <FormControl fullWidth>
           <Input
@@ -35,7 +41,9 @@ export default function TextInput(props: Props) {
             {...field}
             error={!!error}
           />
-          {error && <div>{error.message}</div>}
+          <Error>
+            {error?.message}
+          </Error>
         </FormControl>
       )}
     />
