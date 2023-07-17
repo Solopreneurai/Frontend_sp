@@ -7,24 +7,25 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import { FilledButton } from "../Home/Hero";
 import { Dispatch, SetStateAction, useState } from "react";
 import ChangePassword from "./ChangePassword";
 import { useDispatch } from "react-redux";
-import { login, setAdmin } from "../../store/actions";
-import { useSelector } from "react-redux";
+import { login, setAdmin, setUser } from "../../store/actions";
 import TextInput from "../TextInput";
 import { useForm } from "react-hook-form";
 import Form from "../Form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { loginRequest } from "../../api";
 
-// export const Form = styled(Box)({
-//   margin: "20px 0",
-//   width: "100%",
-//   display: "flex",
-//   gap: "20px",
-//   flexDirection: "column",
-// });
+export const FormStyle = styled(Form)({
+  margin: "20px 0",
+  width: "100%",
+  display: "flex",
+  gap: "20px",
+  flexDirection: "column",
+});
 export const Input = styled(TextField)({
   borderRadius: "10px",
   border: "1px solid #2b3c4d",
@@ -32,9 +33,6 @@ export const Input = styled(TextField)({
     display: "none",
   },
 });
-
-
-
 export const LoginBox = styled(Box)({
   display: "flex",
   justifyContent: "center",
@@ -45,37 +43,60 @@ export const LoginBox = styled(Box)({
 });
 
 type FormProps = {
-  email: string;
+  username: string;
   password: string;
-  afterSubmit?: string;
-}
+};
 
 interface Props {
   setLogin: Dispatch<SetStateAction<boolean>>;
 }
 export default function SignIn({ setLogin }: Props) {
   const dispatch = useDispatch();
-  const admin = useSelector((state: State) => state.isAdmin);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
   const [changePswd, setPswd] = useState(false);
-  
-  // const defaultValues = {
-  //   username: "",
-  //   password: "",
-  // };
-  // const [showPassword, setShowPassword] = useState(false);
-  // const handleShowPassword = () => {
-  //   setShowPassword((showPassword) => !showPassword);
-  // };
-  const handleLogin = () => {
-    console.log("trying to log in");
-    if (username === "SolopreneurAI" && password === "solopreneurai@chatbot") {
-      dispatch(setAdmin(!admin));
-    }
-    dispatch(login());
+
+  const LoginSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const defaultValues = {
+    username: "",
+    password: "",
   };
-  const { handleSubmit, control } = useForm();
+
+  const methods = useForm<FormProps>({
+    resolver: yupResolver(LoginSchema),
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+  } = methods;
+
+  const onSubmit = async (data: FormProps) => {
+    console.log(data);
+    try {
+      await loginRequest(data)
+        .then((res) => {
+          dispatch(setUser(res.data));
+          setTimeout(() => {
+            dispatch(setAdmin(res.data.user.role === "admin"));
+            dispatch(login());
+          }, 1000);
+        })
+        .catch((err) => console.log("error", err));
+    } catch (err) {
+      reset();
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword((showPassword) => !showPassword);
+  };
+
   return (
     <LoginBox>
       {changePswd ? (
@@ -88,57 +109,33 @@ export default function SignIn({ setLogin }: Props) {
           <Typography variant="body1" mb={3}>
             Have we met before?
           </Typography>
-          <Form methods={methods} onSubmit={handleSubmit(handleLogin)}>
-          <TextInput
-            name={username}
-            placeholder="Enter your username"
-            control={control}
-            endAdornment={
-              <InputAdornment position="end">
-                <Person />
-              </InputAdornment>
-            }
-          />
-          </Form>
-          
-          {/* <Form>
-            <Input
+          <FormStyle methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <TextInput
+              name="username"
               placeholder="Enter your username"
-              value={username}
-              onChange={(e: any) => setUsername(e.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Person />
-                  </InputAdornment>
-                ),
-              }}
-              fullWidth
-              required
+              endAdornment={
+                <InputAdornment position="end">
+                  <Person />
+                </InputAdornment>
+              }
             />
-            <Input
-              type={showPassword ? "text" : "password"}
+            <TextInput
+              name="password"
               placeholder="Enter your password"
-              value={password}
-              onChange={(e: any) => setPassword(e.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              fullWidth
-              required
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
-          </Form> */}
-          <Link to="/portal" style={{ width: "100%" }} onClick={handleLogin}>
-            <FilledButton variant="contained" fullWidth>
+            <FilledButton variant="contained" fullWidth type="submit">
               Login
             </FilledButton>
-          </Link>
+          </FormStyle>
+
           <Typography
             variant="body2"
             fontWeight={700}

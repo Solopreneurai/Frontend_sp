@@ -1,82 +1,126 @@
 import { IconButton, InputAdornment, Typography } from "@mui/material";
 import { FilledButton } from "../Home/Hero";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Form, Input, LoginBox } from "./SignIn";
+import { LoginBox } from "./SignIn";
 import { Mail, Person, Visibility, VisibilityOff } from "@mui/icons-material";
+import Form from "../Form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { useForm } from "react-hook-form";
+import TextInput from "../TextInput";
+import { signupRequest } from "../../api";
+
+type FormProps = {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 interface Props {
   setLogin: Dispatch<SetStateAction<boolean>>;
 }
 export default function SignUp({ setLogin }: Props) {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setConfirmPassword] = useState(false);
+
   const handleShowPassword = () => {
     setShowPassword((showPassword) => !showPassword);
   };
+  const handleShowConfirmPassword = () => {
+    setConfirmPassword((showPassword) => !showPassword);
+  };
+  const defaultValues = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  const SignUpSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string().required("Password is required"),
+    confirmPassword: Yup.string().required("Password is required"),
+    email: Yup.string()
+      .email("Email should be in correct format")
+      .required("Email is required"),
+  });
+
+  const methods = useForm<FormProps>({
+    resolver: yupResolver(SignUpSchema),
+    defaultValues,
+  });
+
+  const { reset, handleSubmit } = methods;
+
+  const onSubmit = async (data: FormProps) => {
+    console.log("trying to be sign up");
+    const { confirmPassword, ...rest } = data;
+    try {
+      await signupRequest(rest)
+        .then((res) => {
+          console.log(res);
+          setTimeout(() => {setLogin((login) => !login)},1000)
+        })
+        .catch((error) => console.log(error));
+    } catch (err) {
+      reset();
+    }
+  };
+
   return (
     <LoginBox style={{ paddingTop: 50 }}>
       <Typography variant="h4" fontWeight={600} mb={1}>
         Get started
       </Typography>
-      <Form>
-        <Input
+      <Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
+        <TextInput
+          name="username"
           placeholder="Enter your username"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Person />
-              </InputAdornment>
-            ),
-          }}
-          fullWidth
+          endAdornment={
+            <InputAdornment position="end">
+              <Person />
+            </InputAdornment>
+          }
         />
-        <Input
-          placeholder="Enter your email"
+        <TextInput
+          name="email"
           type="email"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Mail />
-              </InputAdornment>
-            ),
-          }}
-          fullWidth
+          placeholder="Enter your email"
+          endAdornment={
+            <InputAdornment position="end">
+              <Mail />
+            </InputAdornment>
+          }
         />
-        <Input
+        <TextInput
+          name="password"
           placeholder="Enter your password"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          fullWidth
+          type={showPassword ? "text" : "password"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-        <Input
+        <TextInput
+          name="confirmPassword"
           placeholder="Confirm your password"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton sx={{ p: 0 }} onClick={handleShowPassword}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          fullWidth
+          type={showConfirmPassword ? "text" : "password"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton sx={{ p: 0 }} onClick={handleShowConfirmPassword}>
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
+        <FilledButton variant="contained" fullWidth type="submit">
+          Sign Up
+        </FilledButton>
       </Form>
-      <FilledButton
-        variant="contained"
-        fullWidth
-        onClick={() => setLogin((login) => !login)}
-      >
-        Sign Up
-      </FilledButton>
 
       <Typography variant="body1" mt={2}>
         Already have an account ?{" "}
