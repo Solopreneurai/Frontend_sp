@@ -1,4 +1,4 @@
-import { LOGIN,CREATE_BOT, DELETE_BOT, EDIT_BOT, ADMIN } from "./types"
+import { LOGIN,CREATE_BOT, DELETE_BOT, EDIT_BOT, ADMIN, USER, LOGOUT } from "./types"
 
 export const createBot = (bot: BotCardDetails) => {
     return {
@@ -27,9 +27,22 @@ export const login = () => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: LOGOUT
+    }
+}
+
 export const setAdmin = (value: boolean) => {
     return {
         type: ADMIN,
+        payload: value
+    }
+}
+
+export const setUser = (value: User) => {
+    return {
+        type: USER,
         payload: value
     }
 }

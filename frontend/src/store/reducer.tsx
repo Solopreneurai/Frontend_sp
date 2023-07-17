@@ -3,10 +3,13 @@ import {
   DELETE_BOT,
   EDIT_BOT,
   LOGIN, 
-  ADMIN
+  ADMIN,
+  USER,
+  LOGOUT
 } from "./types";
 
 const initialState: State = {
+  userDetails: null,
   isUserLoggedIn: false,
   isAdmin: false,
   botList: [],
@@ -14,8 +17,12 @@ const initialState: State = {
 
 export function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
+    case USER: 
+     return {
+      ...state,
+      userDetails: action.payload
+     }
     case ADMIN:
-      console.log(state.isAdmin, action.payload)
       return {
         ...state,
         isAdmin: action.payload
@@ -23,7 +30,14 @@ export function reducer(state: State = initialState, action: Action): State {
     case LOGIN: 
     return {
       ...state, 
-      isUserLoggedIn: !state.isUserLoggedIn
+      isUserLoggedIn: true
+    }
+    case LOGOUT: 
+    return {
+      ...state, 
+      isUserLoggedIn: false,
+      userDetails: null,
+      isAdmin: false
     }
     case DELETE_BOT:
       return {
